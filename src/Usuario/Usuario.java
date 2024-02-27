@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Usuario;
+import Jugador.Fichas;
 import java.util.Calendar;
 import java.awt.Color;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public class Usuario implements Serializable{
     private final Calendar Fecha;
     private final String Nombre;
     private final String Contra;
-    private Color color;
+    private Jugador.Fichas ficha;
     private TipoJuego Tipo;
     ArrayList<String> Historial;
 
@@ -25,7 +26,7 @@ public class Usuario implements Serializable{
         Fecha = Calendar.getInstance();
         Historial = new ArrayList();
         Tipo = TipoJuego.INDIVIDUAL;
-        color = new Color(0,0,255);
+        ficha = Jugador.Fichas.RED;
     }
     
     //Functions 
@@ -51,6 +52,11 @@ public class Usuario implements Serializable{
     public void setTipo(TipoJuego tipo){
         this.Tipo= tipo;
     }
+
+    public void setFicha(Fichas ficha) {
+        this.ficha = ficha;
+    }
+    
     
     //Getters
     public Calendar getFecha() {
@@ -66,8 +72,8 @@ public class Usuario implements Serializable{
     }
 
    
-    public Color getColor() {
-        return color;
+    public Jugador.Fichas getColor() {
+        return ficha;
     }
 
     public TipoJuego getTipo() {

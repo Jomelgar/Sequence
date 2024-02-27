@@ -4,18 +4,23 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jomel
  */
 public class Individual extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Individual
-     */
+    public ArrayList<String> Users = new ArrayList();
     public Individual() {
         initComponents();
+        Users = new ArrayList();
         setComboUsers();
+        Users.add(Inicio.usuario.getNombre());
+        setListModel();
+        
     }
 
     /**
@@ -47,6 +52,11 @@ public class Individual extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Añadir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jList1.setBackground(new java.awt.Color(204, 204, 204));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -86,12 +96,25 @@ public class Individual extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(!Users.contains(ComboUsers.getSelectedItem().toString()) && Users.size() < 3){
+            Users.add(ComboUsers.getSelectedItem().toString());
+            setListModel();
+        }else if(Users.contains(ComboUsers.getSelectedItem().toString())){
+            JOptionPane.showMessageDialog(null, "ERROR: Este usuario ya esta dentro de la lista.");
+        }else{
+            JOptionPane.showMessageDialog(null, "El alcance maximo de este modo llego a su limite.");
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboUsers;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
+    public javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
@@ -104,5 +127,14 @@ public class Individual extends javax.swing.JPanel {
         }
         
         ComboUsers.setModel(new javax.swing.DefaultComboBoxModel<>(usuarios));
+    }
+    
+    void setListModel(){
+        jList1.setModel(new javax.swing.AbstractListModel<String>(){
+            String[] send = Users.toArray(new String[Users.size()]);
+            String[] strings = send;
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
     }
 }

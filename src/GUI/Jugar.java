@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import Jugador.Fichas;
 import Usuario.TipoJuego;
-
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author jomel
@@ -84,6 +86,11 @@ public class Jugar extends javax.swing.JPanel {
         jButton1.setText("JUGAR");
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 294, 160, 48));
 
         Summary.setEditable(false);
@@ -112,6 +119,19 @@ public class Jugar extends javax.swing.JPanel {
         }
         AgregarPanel();
     }//GEN-LAST:event_TipeGameItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){
+            if(individual.Users.size() > 1){
+                this.InicioJuego(individual.Users.toArray(new String[individual.Users.size()]));
+            }else{
+                JOptionPane.showMessageDialog(null, "ERROR: La cantidad de jugadores elegida no permite jugar.");
+            }
+        }else{
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,5 +162,50 @@ public class Jugar extends javax.swing.JPanel {
         Container.add(Panel);
         Container.revalidate();
         Container.repaint();
+    }
+    
+    void InicioJuego(String[] listado){
+        String[] nombres = listado;
+        Jugador.Jugador[] jugadores = new Jugador.Jugador[nombres.length];
+        ArrayList<Jugador.Fichas> fichas = new ArrayList();
+        fichas.add(Fichas.RED);
+        fichas.add(Fichas.BLUE);
+        fichas.add(Fichas.YELLOW);
+        int mano = 0;
+        switch(listado.length){
+            case 2:
+                mano = 7;
+                break;
+            case 3:
+                mano = 6;
+                break;
+            case 4:
+                mano = 7;
+                break;
+            case 6:
+                mano = 7;
+                break;
+            case 8:
+                 mano = 4;
+                break;
+        }
+        
+        for(int i =0; i< jugadores.length; i++){
+            Usuario.Usuario usuario = Inicio.ManagerAcc.searchUser(nombres[i]);
+            if(i != 0 && !fichas.contains(usuario.getColor())){
+                usuario.setFicha(fichas.get(0));
+            }
+            fichas.remove(fichas.indexOf(usuario.getColor()));
+                
+            if(fichas.isEmpty()){
+                fichas.add(Fichas.RED);
+                fichas.add(Fichas.BLUE);
+                fichas.add(Fichas.YELLOW);
+            }
+            jugadores[i] = new Jugador.Jugador(mano,usuario);
+        }
+        Jugador.Cartas[] baraja = Jugador.Cartas.baraja();
+        Juego.Juego inicio = new Juego.Juego(jugadores, baraja);
+        inicio.setVisible(true);
     }
 }
