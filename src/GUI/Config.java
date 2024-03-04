@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Jugador.Fichas;
 import Usuario.TipoJuego;
 
 /**
@@ -18,6 +19,8 @@ public class Config extends javax.swing.JPanel {
     public Config() {
         initComponents();
         txtUser.setText(Inicio.usuario.getNombre());
+        TipeGame.setSelectedIndex(Inicio.usuario.getTipo().getIndex());
+        setDemonsToken();
     }
 
     /**
@@ -33,6 +36,11 @@ public class Config extends javax.swing.JPanel {
         txtUser = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        TipeGame = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        ColorToken = new javax.swing.JComboBox<>();
+        Muestra_Ficha = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -52,6 +60,38 @@ public class Config extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Usuario:");
 
+        TipeGame.setBackground(new java.awt.Color(204, 204, 204));
+        TipeGame.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TipeGame.setForeground(new java.awt.Color(0, 0, 0));
+        TipeGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INDIVIDUAL", "GRUPAL" }));
+        TipeGame.setOpaque(true);
+        TipeGame.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TipeGameItemStateChanged(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Tipo de Juego:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Color de Ficha:");
+
+        ColorToken.setBackground(new java.awt.Color(204, 204, 204));
+        ColorToken.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ColorToken.setForeground(new java.awt.Color(0, 0, 0));
+        ColorToken.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ROJO", "AZUL", "AMARILLO" }));
+        ColorToken.setOpaque(true);
+        ColorToken.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ColorTokenItemStateChanged(evt);
+            }
+        });
+
+        Muestra_Ficha.setText("xd");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,11 +99,22 @@ public class Config extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txtUser)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 371, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ColorToken, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TipeGame, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUser)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addComponent(Muestra_Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,18 +124,64 @@ public class Config extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(1, 1, 1)
-                .addComponent(txtUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TipeGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ColorToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Muestra_Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void TipeGameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TipeGameItemStateChanged
+        // TODO add your handling code here:
+        if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){
+            Inicio.usuario.setTipo(TipoJuego.INDIVIDUAL);
+        }else{
+            Inicio.usuario.setTipo(TipoJuego.GRUPAL);
+        }
+    }//GEN-LAST:event_TipeGameItemStateChanged
+
+    private void ColorTokenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ColorTokenItemStateChanged
+        // TODO add your handling code here:
+        switch(ColorToken.getSelectedIndex()){
+            case 0:
+                Inicio.usuario.setFicha(Fichas.RED);
+                break;
+            case 1:
+                Inicio.usuario.setFicha(Fichas.BLUE);
+                break;
+            case 2:
+                Inicio.usuario.setFicha(Fichas.YELLOW);
+                break;
+        }
+        setDemonsToken();
+    }//GEN-LAST:event_ColorTokenItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ColorToken;
+    private javax.swing.JLabel Muestra_Ficha;
+    private javax.swing.JComboBox<String> TipeGame;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables
+    void setDemonsToken(){
+        Muestra_Ficha.setText("");
+        Muestra_Ficha.setIcon(Inicio.usuario.getColor().getMuestra());
+        
+    }
 }

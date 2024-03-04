@@ -24,13 +24,20 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnExit" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPlay" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnConfig" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnReports" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="0" pref="73" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSeparator8" pref="222" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                          <Component id="Imagen" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -49,19 +56,12 @@
                           <Component id="jSeparator1" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <Component id="Imagen" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnExit" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnPlay" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnConfig" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="btnReports" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -22,7 +22,6 @@ public class Jugar extends javax.swing.JPanel {
      */
     public Jugar(Menu menu) {
         initComponents();
-        TipeGame.setSelectedIndex(Inicio.usuario.getTipo().getIndex());
         this.menu = menu;
         AgregarPanel();
         txtUser.setText(Inicio.usuario.getNombre());
@@ -41,11 +40,9 @@ public class Jugar extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtUser = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        TipeGame = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         Summary = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
         Container = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -66,18 +63,6 @@ public class Jugar extends javax.swing.JPanel {
         jSeparator1.setForeground(new java.awt.Color(51, 0, 0));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 159, 160, 7));
 
-        TipeGame.setBackground(new java.awt.Color(204, 204, 204));
-        TipeGame.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        TipeGame.setForeground(new java.awt.Color(0, 0, 0));
-        TipeGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INDIVIDUAL", "GRUPAL" }));
-        TipeGame.setOpaque(true);
-        TipeGame.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                TipeGameItemStateChanged(evt);
-            }
-        });
-        add(TipeGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 217, 160, -1));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Usuario:");
@@ -94,7 +79,7 @@ public class Jugar extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 294, 160, 48));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 160, 48));
 
         Summary.setEditable(false);
         Summary.setBackground(new java.awt.Color(51, 51, 51));
@@ -104,28 +89,13 @@ public class Jugar extends javax.swing.JPanel {
         Summary.setText("\"Sequence\" es un juego de mesa en el que el objetivo principal es ser el primer \njugador en formar una secuencia de cinco fichas en el tablero. Cada jugador tiene\n una mano de cartas que representan las casillas en el tablero. Al jugar una carta, \nlos jugadores deben colocar una ficha en la casilla correspondiente. \nLos jugadores deben planificar cuidadosamente sus movimientos para bloquear \na sus oponentes y formar sus propias secuencias. Además de las cartas normales, \nhay cartas especiales que permiten acciones adicionales, como eliminar fichas de\n los oponentes o mover las propias fichas. El juego continúa hasta que un\n jugador logra formar una secuencia de cinco fichas consecutivas, ya sea en línea\n recta, diagonal o en forma de L. ¡Diviértete jugando a \"Sequence\" y \ndemuestra tu habilidad estratégica!");
         add(Summary, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, 181));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Tipo de Juego:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 184, -1, -1));
-
         Container.setBackground(new java.awt.Color(204, 204, 204));
         add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 510, 260));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TipeGameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TipeGameItemStateChanged
-        // TODO add your handling code here:
-        if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){ 
-           Inicio.usuario.setTipo(TipoJuego.INDIVIDUAL);
-        }else{
-           Inicio.usuario.setTipo(TipoJuego.GRUPAL); 
-        }
-        AgregarPanel();
-    }//GEN-LAST:event_TipeGameItemStateChanged
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){
+        if(Inicio.usuario.getTipo() == TipoJuego.INDIVIDUAL){
             if(individual.Users.size() > 1){
                 this.InicioJuego(individual.Users.toArray(new String[individual.Users.size()]));
             }else{
@@ -143,18 +113,16 @@ public class Jugar extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JTextArea Summary;
-    private javax.swing.JComboBox<String> TipeGame;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables
 
     void AgregarPanel(){
         javax.swing.JPanel Panel;
-        if(TipeGame.getSelectedIndex() == 0){
+        if(Inicio.usuario.getTipo() == TipoJuego.INDIVIDUAL){
             individual = new Individual();
             Panel = individual;
             
@@ -198,7 +166,7 @@ public class Jugar extends javax.swing.JPanel {
         }
         for(int i =0; i< jugadores.length; i++){
             Usuario.Usuario usuario = Inicio.ManagerAcc.searchUser(nombres[i]);
-            if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){
+            if(Inicio.usuario.getTipo() == TipoJuego.INDIVIDUAL){
                 if(i != 0 && !fichas.contains(usuario.getColor())){
                 usuario.setFicha(fichas.get(0));
                 }
