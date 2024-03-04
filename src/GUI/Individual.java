@@ -106,7 +106,7 @@ public class Individual extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "El alcance maximo de este modo llego a su limite.");
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -114,7 +114,7 @@ public class Individual extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> ComboUsers;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
-    public javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 

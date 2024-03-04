@@ -24,5 +24,4 @@ public enum Fichas {
     public ImageIcon getFicha(){
         return ficha;
     }
-    
 }

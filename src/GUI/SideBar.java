@@ -402,7 +402,7 @@ public class SideBar extends javax.swing.JPanel {
 
     private void btnPlayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMousePressed
         // TODO add your handling code here:
-        menu.AgregarPanel(new Jugar());
+        menu.AgregarPanel(new Jugar(menu));
         menu.Sidebar.hide();
     }//GEN-LAST:event_btnPlayMousePressed
 

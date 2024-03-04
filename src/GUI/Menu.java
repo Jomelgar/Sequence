@@ -33,7 +33,7 @@ public class Menu extends javax.swing.JFrame {
         });
         Sidebar = Drawer.newDrawer(this).addChild(new SideBar(this)).build();
         timer.start();
-        AgregarPanel(new Jugar());
+        AgregarPanel(new Jugar(this));
     }
 
     /**

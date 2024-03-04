@@ -15,12 +15,15 @@ import javax.swing.JOptionPane;
 public class Jugar extends javax.swing.JPanel {
     
     Individual individual;
+    Grupal grupal;
+    Menu menu;
     /**
      * Creates new form Jugar
      */
-    public Jugar() {
+    public Jugar(Menu menu) {
         initComponents();
         TipeGame.setSelectedIndex(Inicio.usuario.getTipo().getIndex());
+        this.menu = menu;
         AgregarPanel();
         txtUser.setText(Inicio.usuario.getNombre());
         Summary.setBackground(new java.awt.Color(51,51,51,200));
@@ -107,7 +110,7 @@ public class Jugar extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 184, -1, -1));
 
         Container.setBackground(new java.awt.Color(204, 204, 204));
-        add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 450, 260));
+        add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 510, 260));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TipeGameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TipeGameItemStateChanged
@@ -129,7 +132,10 @@ public class Jugar extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "ERROR: La cantidad de jugadores elegida no permite jugar.");
             }
         }else{
-            
+            if(grupal.diffTeams() && grupal.diffTokens()){
+                
+                InicioJuego(grupal.getTeams().toArray(new String[grupal.getTeams().size()]));
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -153,7 +159,8 @@ public class Jugar extends javax.swing.JPanel {
             Panel = individual;
             
         }else{
-            Panel = new javax.swing.JPanel();
+            grupal = new Grupal();
+            Panel = grupal;
         }
         
         Panel.setSize(450, 260);
@@ -189,23 +196,26 @@ public class Jugar extends javax.swing.JPanel {
                  mano = 4;
                 break;
         }
-        
         for(int i =0; i< jugadores.length; i++){
             Usuario.Usuario usuario = Inicio.ManagerAcc.searchUser(nombres[i]);
-            if(i != 0 && !fichas.contains(usuario.getColor())){
+            if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){
+                if(i != 0 && !fichas.contains(usuario.getColor())){
                 usuario.setFicha(fichas.get(0));
-            }
-            fichas.remove(fichas.indexOf(usuario.getColor()));
-                
-            if(fichas.isEmpty()){
-                fichas.add(Fichas.RED);
-                fichas.add(Fichas.BLUE);
-                fichas.add(Fichas.YELLOW);
-            }
-            jugadores[i] = new Jugador.Jugador(mano,usuario);
+                }
+                fichas.remove(fichas.indexOf(usuario.getColor()));
+
+                if(fichas.isEmpty()){
+                    fichas.add(Fichas.RED);
+                    fichas.add(Fichas.BLUE);
+                    fichas.add(Fichas.YELLOW);
+                }
+                }
+                jugadores[i] = new Jugador.Jugador(mano,usuario);
         }
+        
         Jugador.Cartas[] baraja = Jugador.Cartas.baraja();
         Juego.Juego inicio = new Juego.Juego(jugadores, baraja);
         inicio.setVisible(true);
+        menu.dispose();
     }
 }
