@@ -8,6 +8,7 @@ import Jugador.Cartas;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -15,30 +16,36 @@ import javax.swing.border.Border;
  * @author jomel
  */
 public class Board extends javax.swing.JPanel {
+
     Juego juego;
     JLabel[][] Posiciones = new JLabel[10][10];
     JLabel[][] Fichas = new JLabel[10][10];
+    boolean[][] ArraySequence = new boolean[10][10];
+
     /**
      * Creates new form Board
      */
     public Board(Juego juego) {
         initComponents();
+        
         this.juego = juego;
-        for(int f = 0; f< 10; f++){
-            for(int c = 0; c<10; c++){
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                ArraySequence[f][c] = false;
+                
                 Posiciones[f][c] = new JLabel();
-                Posiciones[f][c].setBounds(c*70,f*70,70,70);
+                Posiciones[f][c].setBounds(c * 70, f * 70, 70, 70);
                 Posiciones[f][c].setBorder(null);
                 Fichas[f][c] = new JLabel();
-                Fichas[f][c].setBounds(c*70,f*70,70,70);
+                Fichas[f][c].setBounds(c * 70, f * 70, 70, 70);
                 Posiciones[f][c].addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mousePressed(java.awt.event.MouseEvent e){
+                    public void mousePressed(java.awt.event.MouseEvent e) {
                         BoardClicked(e);
                     }
                 });
                 add(Fichas[f][c]);
                 add(Posiciones[f][c]);
-                
+
             }
         }
         // Fila 1
@@ -147,7 +154,7 @@ public class Board extends javax.swing.JPanel {
         Posiciones[9][6].setIcon(Cartas.D8.getTablero());
         Posiciones[9][7].setIcon(Cartas.D7.getTablero());
         Posiciones[9][8].setIcon(Cartas.D6.getTablero());
-        
+
         //Corner
         ImageIcon icon = new ImageIcon(getClass().getResource("/Imagenes/Transparente.jpg"));
         Fichas[0][0].setIcon(icon);
@@ -179,25 +186,24 @@ public class Board extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void BoardClicked(java.awt.event.MouseEvent evt){
-        for(int f = 0; f< 10; f++){
-            for(int c = 0; c<10; c++){
-                if(Posiciones[f][c] == evt.getSource()){
-                    CardInteraction(Posiciones[f][c], f,c);
+    public void BoardClicked(java.awt.event.MouseEvent evt) {
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                if (Posiciones[f][c] == evt.getSource()) {
+                    CardInteraction(Posiciones[f][c], f, c);
                 }
             }
         }
     }
-    
-    public void CardInteraction(JLabel card, int fila, int columna){
-        if(card.getBorder() != null){
-            if(!juego.bloquear){
+
+    public void CardInteraction(JLabel card, int fila, int columna) {
+        if (card.getBorder() != null) {
+            if (!juego.bloquear) {
                 Fichas[fila][columna].setIcon(juego.JugadorActual.getFicha());
-            }else{
-                if(Fichas[fila][columna].getIcon() == null){
+            } else {
+                if (Fichas[fila][columna].getIcon() == null) {
                     Fichas[fila][columna].setIcon(juego.JugadorActual.getFicha());
-                }else{
+                } else {
                     Fichas[fila][columna].setIcon(null);
                 }
                 juego.bloquear = false;
@@ -205,49 +211,157 @@ public class Board extends javax.swing.JPanel {
             emptyBorder();
             juego.players[0].stopCronometer();
             juego.cambioTurno();
+            SequenceCheck();
+        }
+    }
+
+    public boolean ganeVertical(int fila, int columna) {
+        int filaAnterior = fila;
+        
+        try {
+            for (int i = 0; i < 5; i++) {
+                if (Fichas[fila + i][columna].getIcon() == Fichas[filaAnterior][columna].getIcon() && Fichas[fila + i][columna].getIcon()!=null && !ArraySequence[fila+i][columna]) {
+                    filaAnterior = fila + i;
+                } else {
+                    return false;
+                }
+            }
+            for (int i = 0; i < 5; i++) {
+                ArraySequence[fila+i][columna] = true;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public boolean ganeHorizontal(int fila, int columna) {
+        int columnaAnterior = columna;
+
+        try {
+            for (int i = 0; i < 5; i++) {
+                if (Fichas[fila][columna + i].getIcon() == Fichas[fila][columnaAnterior].getIcon() && Fichas[fila][columna + i].getIcon() != null && !ArraySequence[fila][columna+i]) {
+                    columnaAnterior = columna + i;
+                } else {
+                    return false;
+                }
+            }
+            for (int i = 0; i < 5; i++) {
+                ArraySequence[fila][columna+i] = true;
+            }
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean ganeDiagonal1(int fila, int columna) {
+        int columnaAnterior = columna;
+        int filaAnterior = fila;
+
+        try {
+            for (int i = 0; i < 5; i++) {
+                if (Fichas[fila + i][columna + i].getIcon() == Fichas[filaAnterior][columnaAnterior].getIcon() && Fichas[fila + i][columna + i].getIcon() !=null && !ArraySequence[fila+i][columna+i]) {
+                    columnaAnterior = columna + i;
+                    filaAnterior = fila + i;
+                } else {
+                    return false;
+                }
+            }
             
+            for (int i = 0; i < 5; i++) {
+                ArraySequence[fila+i][columna+i] = true;
+            }
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+    
+    public boolean ganeDiagonal2(int fila, int columna) {
+        int columnaAnterior = columna;
+        int filaAnterior = fila;
+
+        try {
+            for (int i = 0; i < 5; i++) {
+                if (Fichas[fila + i*-1][columna + i].getIcon() == Fichas[filaAnterior][columnaAnterior].getIcon() && Fichas[fila + i*-1][columna + i].getIcon() != null && !ArraySequence[fila+i*-1][columna+i]) {
+                    columnaAnterior = columna + i;
+                    filaAnterior = fila + i*-1;
+                } else {
+                    return false;
+                }
+            }
+            for (int i = 0; i < 5; i++) {
+                ArraySequence[fila+i*-1][columna+i] = true;
+            }
+            return true;
+
+        } catch (Exception e) {
+            return false;
         }
     }
     
-    public void emptyBorder(){
-        for(int f = 0; f< 10; f++){
-            for(int c = 0; c<10; c++){
+    public void SequenceCheck(){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (ganeHorizontal(i,j)) {
+                    JOptionPane.showMessageDialog(null, "Gane 1", "HAS HEHCO UN GANE HORIZONTAL", JOptionPane.INFORMATION_MESSAGE , null);
+                }if (ganeVertical(i,j)) {
+                    JOptionPane.showMessageDialog(null, "Gane 1", "HAS HEHCO UN GANE VERTICAL", JOptionPane.INFORMATION_MESSAGE , null);
+                }if (ganeDiagonal1(i,j)) {
+                    JOptionPane.showMessageDialog(null, "Gane 1", "HAS HEHCO UN GANE DIAGONAL", JOptionPane.INFORMATION_MESSAGE , null);
+                }if (ganeDiagonal2(i,j)) {
+                    JOptionPane.showMessageDialog(null, "Gane 1", "HAS HEHCO UN GANE DIAGONAL 2", JOptionPane.INFORMATION_MESSAGE , null);
+                }
+            }
+        }
+    }
+    
+
+    public void emptyBorder() {
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
                 Posiciones[f][c].setBorder(null);
             }
         }
     }
-    
-    public void detectCard(int image){
+
+    public void detectCard(int image) {
         emptyBorder();
-        for(int f = 0; f< 10; f++){
-            for(int c = 0; c<10; c++){
-                if(Cartas.getImage((ImageIcon)Posiciones[f][c].getIcon()) == image && Fichas[f][c].getIcon() == null){
-                    Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                if (Cartas.getImage((ImageIcon) Posiciones[f][c].getIcon()) == image && Fichas[f][c].getIcon() == null) {
+                    Border border = new javax.swing.border.LineBorder(new java.awt.Color(0, 200, 0), 4);
                     Posiciones[f][c].setBorder(border);
                 }
             }
         }
-        
+
     }
-    
-    public void borderAll(){
+
+    public void borderAll() {
         emptyBorder();
-        for(int f = 0; f< 10; f++){
-            for(int c = 0; c<10; c++){
-                Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                Border border = new javax.swing.border.LineBorder(new java.awt.Color(0, 200, 0), 4);
                 Posiciones[f][c].setBorder(border);
             }
-            
+
             Posiciones[0][0].setBorder(null);
             Posiciones[0][9].setBorder(null);
             Posiciones[9][0].setBorder(null);
             Posiciones[9][9].setBorder(null);
         }
     }
-    public boolean fullTokens(){
-        for(JLabel[] col: Fichas){
-            for(JLabel fila:col){
-                if(fila.getIcon() == null){
+
+    public boolean fullTokens() {
+        for (JLabel[] col : Fichas) {
+            for (JLabel fila : col) {
+                if (fila.getIcon() == null) {
                     return false;
                 }
             }
