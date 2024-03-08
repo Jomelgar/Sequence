@@ -300,10 +300,11 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Rojo"/>
             <StringItem index="1" value="Azul"/>
             <StringItem index="2" value="Amarillo"/>
+            <StringItem index="3" value="Verde"/>
           </StringArray>
         </Property>
       </Properties>
@@ -328,10 +329,11 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Rojo"/>
             <StringItem index="1" value="Azul"/>
             <StringItem index="2" value="Amarillo"/>
+            <StringItem index="3" value="Verde"/>
           </StringArray>
         </Property>
       </Properties>
@@ -356,10 +358,11 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Rojo"/>
             <StringItem index="1" value="Azul"/>
             <StringItem index="2" value="Amarillo"/>
+            <StringItem index="3" value="Verde"/>
           </StringArray>
         </Property>
       </Properties>

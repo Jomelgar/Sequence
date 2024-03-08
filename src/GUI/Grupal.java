@@ -151,7 +151,7 @@ public class Grupal extends javax.swing.JPanel {
 
         ComboTeam2.setBackground(new java.awt.Color(255, 204, 204));
         ComboTeam2.setForeground(new java.awt.Color(0, 0, 0));
-        ComboTeam2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Azul", "Amarillo" }));
+        ComboTeam2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Azul", "Amarillo", "Verde" }));
         ComboTeam2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboTeam2ItemStateChanged(evt);
@@ -161,7 +161,7 @@ public class Grupal extends javax.swing.JPanel {
 
         ComboTeam1.setBackground(new java.awt.Color(255, 204, 204));
         ComboTeam1.setForeground(new java.awt.Color(0, 0, 0));
-        ComboTeam1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Azul", "Amarillo" }));
+        ComboTeam1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Azul", "Amarillo", "Verde" }));
         ComboTeam1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboTeam1ItemStateChanged(evt);
@@ -171,7 +171,7 @@ public class Grupal extends javax.swing.JPanel {
 
         ComboTeam3.setBackground(new java.awt.Color(255, 204, 204));
         ComboTeam3.setForeground(new java.awt.Color(0, 0, 0));
-        ComboTeam3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Azul", "Amarillo" }));
+        ComboTeam3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Azul", "Amarillo", "Verde" }));
         ComboTeam3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboTeam3ItemStateChanged(evt);
@@ -280,8 +280,6 @@ public class Grupal extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> NumPlayers;
     private javax.swing.JComboBox<String> Players;
     private javax.swing.JComboBox<String> Team;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -369,6 +367,9 @@ public class Grupal extends javax.swing.JPanel {
                 case 2:
                     usuario.setFicha(Fichas.YELLOW);
                     break;
+                case 3:
+                    usuario.setFicha(Fichas.GREEN);
+                    break;
             }
         }
         listado.addAll(Team2);
@@ -383,6 +384,9 @@ public class Grupal extends javax.swing.JPanel {
                     break;
                 case 2:
                     usuario.setFicha(Fichas.YELLOW);
+                    break;
+                case 3:
+                    usuario.setFicha(Fichas.GREEN);
                     break;
             }
         }
@@ -399,6 +403,9 @@ public class Grupal extends javax.swing.JPanel {
                     break;
                 case 2:
                     usuario.setFicha(Fichas.YELLOW);
+                    break;
+                case 3:
+                    usuario.setFicha(Fichas.GREEN);
                     break;
             }
         }

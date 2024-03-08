@@ -11,7 +11,8 @@ import javax.swing.ImageIcon;
  * @author jomel
  */
 public enum Fichas {
-    RED("/Imagenes/token_Rojo.png"),BLUE("/Imagenes/token_Azul.png"),YELLOW("/Imagenes/token_Amarillo.png"), NOT("/Imagenes/Bloqueado.png");
+    RED("/Imagenes/token_Rojo.png"),BLUE("/Imagenes/token_Azul.png"),YELLOW("/Imagenes/token_Amarillo.png"),
+    GREEN("/Imagenes/token_Verde.png"),NOT("/Imagenes/Bloqueado.png");
     
     ImageIcon ficha, muestra;
     

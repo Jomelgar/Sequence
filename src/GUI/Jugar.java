@@ -146,6 +146,7 @@ public class Jugar extends javax.swing.JPanel {
         fichas.add(Fichas.RED);
         fichas.add(Fichas.BLUE);
         fichas.add(Fichas.YELLOW);
+        fichas.add(Fichas.GREEN);
         int mano = 0;
         switch(listado.length){
             case 2:
@@ -176,6 +177,7 @@ public class Jugar extends javax.swing.JPanel {
                     fichas.add(Fichas.RED);
                     fichas.add(Fichas.BLUE);
                     fichas.add(Fichas.YELLOW);
+                    fichas.add(Fichas.GREEN);
                 }
                 }
                 jugadores[i] = new Jugador.Jugador(mano,usuario);
