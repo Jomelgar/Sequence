@@ -119,6 +119,23 @@ public class EnTurno extends javax.swing.JPanel{
        miniManojo.revalidate();
        miniManojo.repaint();
    }
+   
+   public void setPoints(int[] points){
+       switch(Jugador.Fichas.getEnum(jugador.getFicha())){
+           case RED:
+               Ganes.setText("Puntos de Gane: " + Integer.toString(points[0]));
+               break;
+           case BLUE:
+               Ganes.setText("Puntos de Gane: " + Integer.toString(points[1]));
+               break;
+           case YELLOW:
+               Ganes.setText("Puntos de Gane: " + Integer.toString(points[2]));
+               break;
+           case GREEN:
+               Ganes.setText("Puntos de Gane: " + Integer.toString(points[3]));
+               break;
+       }
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Ficha;
     private javax.swing.JLabel Ganes;

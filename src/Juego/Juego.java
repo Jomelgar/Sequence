@@ -292,7 +292,10 @@ public class Juego extends javax.swing.JFrame {
     // Verificar cuando llegue a 104.
     public void cambioTurno() {
         lastCard();
-        if(tablero.fullTokens()){
+        if(tablero.fullTokens() || tablero.SomeoneWins()){
+            GUI.Menu inicio = new GUI.Menu();
+            inicio.setLocationRelativeTo(null);
+            inicio.setVisible(true);
             this.dispose();
         }else{
             DrawCard();

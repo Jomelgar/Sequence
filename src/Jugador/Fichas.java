@@ -31,4 +31,13 @@ public enum Fichas {
     public ImageIcon getMuestra(){
         return muestra;
     }
+    
+    public static Fichas getEnum(ImageIcon img){
+        for(Fichas ficha: Fichas.values()){
+            if(img.equals(ficha.getFicha())){
+                return ficha;
+            }
+        }
+        return null;
+    }
 }
