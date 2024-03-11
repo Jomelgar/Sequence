@@ -20,7 +20,11 @@ public class Board extends javax.swing.JPanel {
     Juego juego;
     JLabel[][] Posiciones = new JLabel[10][10];
     JLabel[][] Fichas = new JLabel[10][10];
-    boolean[][] ArraySequence = new boolean[10][10];
+    boolean[][] HorizontalSeq = new boolean[10][10];
+    boolean[][] VerticalSeq = new boolean[10][10];
+    boolean[][] RDiagonalSeq = new boolean[10][10];
+    boolean[][] LDiagonalSeq = new boolean[10][10];
+    
     /*
     0- Rojo
     1- Azul 
@@ -35,7 +39,6 @@ public class Board extends javax.swing.JPanel {
         this.juego = juego;
         for (int f = 0; f < 10; f++) {
             for (int c = 0; c < 10; c++) {
-                ArraySequence[f][c] = false;
                 
                 Posiciones[f][c] = new JLabel();
                 Posiciones[f][c].setBounds(c * 70, f * 70, 70, 70);
@@ -208,118 +211,10 @@ public class Board extends javax.swing.JPanel {
             }
             emptyBorder();
             juego.players[0].stopCronometer();
-            SequenceCheck();
+            resetTokens();
+            Sequence();
             juego.cambioTurno();
             winPoints();
-        }
-    }
-
-    public boolean ganeVertical(int fila, int columna) {
-        int filaAnterior = fila;
-        
-        try {
-            for (int i = 0; i < 5; i++) {
-                if (Fichas[fila + i][columna].getIcon() == Fichas[filaAnterior][columna].getIcon() && Fichas[fila + i][columna].getIcon()!=null && !ArraySequence[fila+i][columna]) {
-                    filaAnterior = fila + i;
-                } else {
-                    return false;
-                }
-            }
-            for (int i = 0; i < 5; i++) {
-                ArraySequence[fila+i][columna] = true;
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-
-    public boolean ganeHorizontal(int fila, int columna) {
-        int columnaAnterior = columna;
-
-        try {
-            for (int i = 0; i < 5; i++) {
-                if (Fichas[fila][columna + i].getIcon() == Fichas[fila][columnaAnterior].getIcon() && Fichas[fila][columna + i].getIcon() != null && !ArraySequence[fila][columna+i]) {
-                    columnaAnterior = columna + i;
-                } else {
-                    return false;
-                }
-            }
-            for (int i = 0; i < 5; i++) {
-                ArraySequence[fila][columna+i] = true;
-            }
-            return true;
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean ganeDiagonal1(int fila, int columna) {
-        int columnaAnterior = columna;
-        int filaAnterior = fila;
-
-        try {
-            for (int i = 0; i < 5; i++) {
-                if (Fichas[fila + i][columna + i].getIcon() == Fichas[filaAnterior][columnaAnterior].getIcon() && Fichas[fila + i][columna + i].getIcon() !=null && !ArraySequence[fila+i][columna+i]) {
-                    columnaAnterior = columna + i;
-                    filaAnterior = fila + i;
-                } else {
-                    return false;
-                }
-            }
-            
-            for (int i = 0; i < 5; i++) {
-                ArraySequence[fila+i][columna+i] = true;
-            }
-            return true;
-
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-    
-    public boolean ganeDiagonal2(int fila, int columna) {
-        int columnaAnterior = columna;
-        int filaAnterior = fila;
-
-        try {
-            for (int i = 0; i < 5; i++) {
-                if (Fichas[fila + i*-1][columna + i].getIcon() == Fichas[filaAnterior][columnaAnterior].getIcon() && Fichas[fila + i*-1][columna + i].getIcon() != null && !ArraySequence[fila+i*-1][columna+i]) {
-                    columnaAnterior = columna + i;
-                    filaAnterior = fila + i*-1;
-                } else {
-                    return false;
-                }
-            }
-            for (int i = 0; i < 5; i++) {
-                ArraySequence[fila+i*-1][columna+i] = true;
-            }
-            return true;
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    public void SequenceCheck(){
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (ganeHorizontal(i,j)) {
-                    switchTokens((ImageIcon)Fichas[i][j].getIcon());
-                    new Messages.GaneHori((ImageIcon)Fichas[i][j].getIcon());
-                }if (ganeVertical(i,j)) {
-                    switchTokens((ImageIcon)Fichas[i][j].getIcon());
-                    new Messages.GaneVert((ImageIcon)Fichas[i][j].getIcon());
-                    switchTokens((ImageIcon)Fichas[i][j].getIcon());
-                    new Messages.GaneDiag((ImageIcon)Fichas[i][j].getIcon());
-                }if (ganeDiagonal2(i,j)) {
-                    switchTokens((ImageIcon)Fichas[i][j].getIcon());
-                    new Messages.GaneDiag((ImageIcon)Fichas[i][j].getIcon());
-                }
-            }
         }
     }
     
@@ -380,7 +275,7 @@ public class Board extends javax.swing.JPanel {
         return true;
     }
     
-    public void switchTokens(ImageIcon img){
+    private void switchTokens(ImageIcon img){
         switch(Jugador.Fichas.getEnum(img)){
             case RED:
                 ColorGane[0]++;
@@ -397,6 +292,21 @@ public class Board extends javax.swing.JPanel {
         }
     }
     
+    private void resetTokens(){
+        for(int i = 0; i < ColorGane.length; i++){
+            ColorGane[i] =0;
+        }
+        
+        for(int i = 0; i < 10; i++){
+            for(int c = 0; c < 10; c++){
+                HorizontalSeq[i][c] = false;
+                VerticalSeq[i][c] = false;
+                RDiagonalSeq[i][c] = false;
+                LDiagonalSeq[i][c] = false;
+            }
+        }
+    }
+    
     public boolean SomeoneWins(){
         for(int points: ColorGane){
             if(points >= 2){
@@ -407,7 +317,152 @@ public class Board extends javax.swing.JPanel {
         return false;
     }
     
+    //bordes no detectados en vertical y diagonal a izq
+    private void Sequence(){
+        resetTokens();
+        for(int row = 0; row < 10; row++){
+            for(int column = 0; column < 10; column++){
+                switchSequence(row, column);
+            }
+        }
+    }
     
+    private void switchSequence(int row, int column){
+        if(Fichas[row][column].getIcon() != null && HorizontalSeq(row, column)){
+            if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
+                new Messages.GaneHori((ImageIcon)Fichas[row][column+1].getIcon());
+                switchTokens((ImageIcon)Fichas[row][column+1].getIcon());
+            }else{
+                new Messages.GaneHori((ImageIcon)Fichas[row][column].getIcon());
+                switchTokens((ImageIcon)Fichas[row][column].getIcon());
+            }
+        }else if(Fichas[row][column].getIcon() != null && VerticalSeq(row, column)){
+            if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
+                new Messages.GaneVert((ImageIcon)Fichas[row+1][column].getIcon());
+                switchTokens((ImageIcon)Fichas[row+1][column].getIcon());
+            }else{
+                new Messages.GaneVert((ImageIcon)Fichas[row][column].getIcon());
+                switchTokens((ImageIcon)Fichas[row][column].getIcon());
+            }
+        }else if(Fichas[row][column].getIcon() != null && DiagonaltoLeftSeq(row, column)){
+            if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
+                new Messages.GaneDiag((ImageIcon)Fichas[row+1][column+1].getIcon());
+                switchTokens((ImageIcon)Fichas[row+1][column+1].getIcon());
+            }else{
+                new Messages.GaneDiag((ImageIcon)Fichas[row][column].getIcon());
+                switchTokens((ImageIcon)Fichas[row][column].getIcon());
+            }
+            
+        }else if(Fichas[row][column].getIcon() != null && DiagonaltoRightSeq(row,column)){
+            if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
+                new Messages.GaneDiag((ImageIcon)Fichas[row+1][column-1].getIcon());
+                switchTokens((ImageIcon)Fichas[row+1][column-1].getIcon());
+            }else{
+                new Messages.GaneDiag((ImageIcon)Fichas[row][column].getIcon());
+                switchTokens((ImageIcon)Fichas[row][column].getIcon());
+            }
+        }
+    }
+    
+    private boolean VerticalSeq(int row, int column){
+        try{
+            JLabel ficha = Fichas[row][column];
+            for(int i = row+1; i < row +5; i++){
+                if(Fichas[i][column].getIcon() == null || (Fichas[i][column].getIcon() != ficha.getIcon()
+                   && (ficha.getIcon() != Fichas[0][0].getIcon() && 
+                        Fichas[i][column].getIcon() != Fichas[0][0].getIcon())) ||
+                        VerticalSeq[i][column]){
+                    //No se toma como secuencia
+                    return false;
+                }
+                ficha = Fichas[i][column];
+            }
+            
+            for(int i = row; i < row +5; i++){
+                if(i != 0 || i != 9){
+                    System.out.println("vertical");
+                    VerticalSeq[i][column] = true;
+                }
+            }
+            
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    
+    private boolean HorizontalSeq(int row, int column){
+        try{
+            JLabel ficha = Fichas[row][column];
+            for(int i = column+1; i < column +5; i++){
+                if(Fichas[row][i].getIcon() == null ||(Fichas[row][i].getIcon() != ficha.getIcon()
+                   && (ficha.getIcon() != Fichas[0][0].getIcon() && 
+                        Fichas[row][i].getIcon() != Fichas[0][0].getIcon())) ||
+                        HorizontalSeq[row][i]){
+                    //No se toma como secuencia
+                    return false;
+                }
+                ficha = Fichas[row][i];
+            }
+            
+            for(int i = column; i < column +5; i++){
+                if(i != 0 || i != 9){
+                    HorizontalSeq[row][i] = true;
+                }
+            }
+            
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+    private boolean DiagonaltoLeftSeq(int row, int column){
+        try{
+            JLabel ficha = Fichas[row][column];
+            for(int i = 1; i < 5; i++){
+                if(Fichas[i+row][column+i].getIcon() == null ||(Fichas[row + i][i+ column].getIcon() != Fichas[row][column].getIcon()
+                   && (ficha.getIcon() != Fichas[0][0].getIcon() && 
+                        Fichas[i+ row][i+column].getIcon() != Fichas[0][0].getIcon())) ||
+                        LDiagonalSeq[row + i][i+ column]){
+                    //No se toma como secuencia
+                    return false;
+                }
+                ficha = Fichas[row + i][i+ column];
+            }
+            
+             for(int i = 0; i < 5; i++){
+                 LDiagonalSeq[row + i][i+ column] = true;
+             }
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+    private boolean DiagonaltoRightSeq(int row, int column){
+        try{
+            JLabel ficha= Fichas[row][column];
+            for(int i = 1; i < 5; i++){
+                if(Fichas[i+row][column-i].getIcon() == null ||(Fichas[row + i][column-i].getIcon() != Fichas[row][column].getIcon()
+                  && (ficha.getIcon() != Fichas[0][0].getIcon() && 
+                        Fichas[row+i][column-i].getIcon() != Fichas[0][0].getIcon())) ||
+                        RDiagonalSeq[row + i][column-i]){
+                    //No se toma como secuencia
+                    return false;
+                }
+                ficha = Fichas[row+i][column-i];
+            }
+            
+             for(int i = 0; i < 5; i++){
+                 RDiagonalSeq[row + i][column-i] = true;
+             }
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

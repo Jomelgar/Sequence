@@ -25,7 +25,7 @@ public class EnTurno extends javax.swing.JPanel{
         this.jugador = jugador;
         setCards();
         User.setText(jugador.getUsuario().getNombre());
-        Ganes.setText("Puntos de Gane: " + jugador.getGanes());
+        Ganes.setText("Puntos de Gane: " + 0);
         Ficha.setText("");
         Ficha.setIcon(jugador.getFicha());
         this.juego = juego;

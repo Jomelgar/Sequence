@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
  */
 public class Jugador {
     Fichas ficha;
-    int ganes;
     Cartas[] manojo;
     Usuario usuario;
 
@@ -18,7 +17,6 @@ public class Jugador {
         this.ficha = usuario.getColor();
         this.manojo = new Cartas[size];
         this.usuario = usuario;
-        ganes =0;
     }
     //Functions
     public void setManojo(Cartas carta, int pos) {
@@ -32,10 +30,6 @@ public class Jugador {
     //Getters
     public ImageIcon getFicha(){
         return ficha.getFicha();
-    }
-
-    public int getGanes() {
-        return ganes;
     }
 
     public Cartas[] getManojo() {

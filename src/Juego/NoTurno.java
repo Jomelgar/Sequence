@@ -24,7 +24,7 @@ public class NoTurno extends javax.swing.JPanel {
         User.setText(jugador.getUsuario().getNombre());
         Ficha.setText("");
         Ficha.setIcon(jugador.getFicha());
-        Gane.setText("Puntos de Gane: " + jugador.getGanes());
+        Gane.setText("Puntos de Gane: " + 0);
         JLabel[] incognitas = new JLabel[jugador.getManojo().length];
         for(int i =0; i < incognitas.length; i++){
             incognitas[i] = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Incognita_MIN.png")));
