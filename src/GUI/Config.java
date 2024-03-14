@@ -34,6 +34,17 @@ public class Config extends javax.swing.JPanel {
                 ColorToken.setSelectedIndex(3);
         }
         setDemonsToken();
+        
+        int[] copia = Inicio.usuario.getCardPower();
+        CBReyPica.setSelectedIndex(copia[0]);
+        CBReyDia.setSelectedIndex(copia[1]);
+        CBReyCora.setSelectedIndex(copia[2]);
+        CBReyTrebol.setSelectedIndex(copia[3]);
+        CBReinaPica.setSelectedIndex(copia[4]);
+        CBReinaDia.setSelectedIndex(copia[5]);
+        CBReinaCora.setSelectedIndex(copia[6]);
+        CBReinaTrebol.setSelectedIndex(copia[7]);
+        
     }
 
     /**
@@ -55,24 +66,46 @@ public class Config extends javax.swing.JPanel {
         ColorToken = new javax.swing.JComboBox<>();
         Muestra_Ficha = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        CBReyDia = new javax.swing.JComboBox<>();
+        CBReyPica = new javax.swing.JComboBox<>();
+        CBReinaDia = new javax.swing.JComboBox<>();
+        CBReinaPica = new javax.swing.JComboBox<>();
+        CBReinaCora = new javax.swing.JComboBox<>();
+        CBReinaTrebol = new javax.swing.JComboBox<>();
+        CBReyCora = new javax.swing.JComboBox<>();
+        CBReyTrebol = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("CONFIGURACIONES");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 48, -1, -1));
 
         txtUser.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         txtUser.setForeground(new java.awt.Color(0, 0, 0));
         txtUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtUser.setText("Nombre de Usuario");
         txtUser.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 128, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 0, 0));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 159, 160, 7));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Usuario:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 102, -1, -1));
 
         TipeGame.setBackground(new java.awt.Color(204, 204, 204));
         TipeGame.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -84,14 +117,17 @@ public class Config extends javax.swing.JPanel {
                 TipeGameItemStateChanged(evt);
             }
         });
+        add(TipeGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 229, 160, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Tipo de Juego:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 198, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Color de Ficha:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 310, 139, -1));
 
         ColorToken.setBackground(new java.awt.Color(204, 204, 204));
         ColorToken.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -103,72 +139,126 @@ public class Config extends javax.swing.JPanel {
                 ColorTokenItemStateChanged(evt);
             }
         });
+        add(ColorToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 347, 160, -1));
 
         Muestra_Ficha.setText("xd");
+        add(Muestra_Ficha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 150, 150));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Muestra de Ficha:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 208, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ColorToken, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TipeGame, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUser))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(Muestra_Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(103, 103, 103))))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(1, 1, 1)
-                .addComponent(txtUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TipeGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ColorToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 35, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(Muestra_Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Poderes de Rey y Reina:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 240, 284, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Rey de Pica:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 284, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Reina de Pica:");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 284, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Rey de Diamante:");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 339, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Rey de Corazon:");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Rey de Trebol:");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Reina de Trebol:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 460, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Reina de Diamante:");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 339, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Reina de Corazon:");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, -1, -1));
+
+        CBReyDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReyDia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReyDiaItemStateChanged(evt);
+            }
+        });
+        add(CBReyDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 140, -1));
+
+        CBReyPica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReyPica.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReyPicaItemStateChanged(evt);
+            }
+        });
+        add(CBReyPica, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 140, -1));
+
+        CBReinaDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReinaDia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReinaDiaItemStateChanged(evt);
+            }
+        });
+        add(CBReinaDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 140, -1));
+
+        CBReinaPica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReinaPica.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReinaPicaItemStateChanged(evt);
+            }
+        });
+        add(CBReinaPica, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, 140, -1));
+
+        CBReinaCora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReinaCora.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReinaCoraItemStateChanged(evt);
+            }
+        });
+        add(CBReinaCora, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 140, -1));
+
+        CBReinaTrebol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReinaTrebol.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReinaTrebolItemStateChanged(evt);
+            }
+        });
+        add(CBReinaTrebol, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 140, -1));
+
+        CBReyCora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReyCora.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReyCoraItemStateChanged(evt);
+            }
+        });
+        add(CBReyCora, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, 140, -1));
+
+        CBReyTrebol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Robar Cartas", "Mover fichas", "Intercambiar fichas" }));
+        CBReyTrebol.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBReyTrebolItemStateChanged(evt);
+            }
+        });
+        add(CBReyTrebol, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TipeGameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TipeGameItemStateChanged
@@ -199,16 +289,73 @@ public class Config extends javax.swing.JPanel {
         setDemonsToken();
     }//GEN-LAST:event_ColorTokenItemStateChanged
 
+    private void CBReyPicaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyPicaItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(40, CBReyPica.getSelectedIndex());
+    }//GEN-LAST:event_CBReyPicaItemStateChanged
+
+    private void CBReyDiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyDiaItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(41, CBReyDia.getSelectedIndex());
+    }//GEN-LAST:event_CBReyDiaItemStateChanged
+
+    private void CBReyCoraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyCoraItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(42, CBReyCora.getSelectedIndex());
+    }//GEN-LAST:event_CBReyCoraItemStateChanged
+
+    private void CBReyTrebolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyTrebolItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(43, CBReyTrebol.getSelectedIndex());
+    }//GEN-LAST:event_CBReyTrebolItemStateChanged
+
+    private void CBReinaPicaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaPicaItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(44, CBReinaPica.getSelectedIndex());
+    }//GEN-LAST:event_CBReinaPicaItemStateChanged
+
+    private void CBReinaDiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaDiaItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(45, CBReinaDia.getSelectedIndex());
+    }//GEN-LAST:event_CBReinaDiaItemStateChanged
+
+    private void CBReinaCoraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaCoraItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(46, CBReinaCora.getSelectedIndex());
+    }//GEN-LAST:event_CBReinaCoraItemStateChanged
+
+    private void CBReinaTrebolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaTrebolItemStateChanged
+        // TODO add your handling code here:
+        Inicio.usuario.setPower(47, CBReinaTrebol.getSelectedIndex());
+    }//GEN-LAST:event_CBReinaTrebolItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBReinaCora;
+    private javax.swing.JComboBox<String> CBReinaDia;
+    private javax.swing.JComboBox<String> CBReinaPica;
+    private javax.swing.JComboBox<String> CBReinaTrebol;
+    private javax.swing.JComboBox<String> CBReyCora;
+    private javax.swing.JComboBox<String> CBReyDia;
+    private javax.swing.JComboBox<String> CBReyPica;
+    private javax.swing.JComboBox<String> CBReyTrebol;
     private javax.swing.JComboBox<String> ColorToken;
     private javax.swing.JLabel Muestra_Ficha;
     private javax.swing.JComboBox<String> TipeGame;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables

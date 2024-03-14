@@ -20,8 +20,8 @@ public enum Fichas {
         ImageIcon imagen = new ImageIcon(getClass().getResource(url));
         ficha = new ImageIcon(imagen.getImage().getScaledInstance(70,
                             70,java.awt.Image.SCALE_SMOOTH));
-        muestra = new ImageIcon(imagen.getImage().getScaledInstance(300,
-                            300,java.awt.Image.SCALE_SMOOTH));
+        muestra = new ImageIcon(imagen.getImage().getScaledInstance(150,
+                            150,java.awt.Image.SCALE_SMOOTH));
     }
     
     public ImageIcon getFicha(){

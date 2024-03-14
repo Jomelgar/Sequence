@@ -19,11 +19,8 @@ public class Board extends javax.swing.JPanel {
 
     Juego juego;
     JLabel[][] Posiciones = new JLabel[10][10];
-    JLabel[][] Fichas = new JLabel[10][10];
-    boolean[][] HorizontalSeq = new boolean[10][10];
-    boolean[][] VerticalSeq = new boolean[10][10];
-    boolean[][] RDiagonalSeq = new boolean[10][10];
-    boolean[][] LDiagonalSeq = new boolean[10][10];
+    public JLabel[][] Fichas = new JLabel[10][10];
+    public boolean[][] ArraySequence = new boolean[10][10];
     
     /*
     0- Rojo
@@ -168,6 +165,11 @@ public class Board extends javax.swing.JPanel {
         Fichas[0][9].setIcon(icon);
         Fichas[9][0].setIcon(icon);
         Fichas[9][9].setIcon(icon);
+        icon = new ImageIcon(getClass().getResource("/Imagenes/Borde.png"));
+        Posiciones[0][0].setIcon(icon);
+        Posiciones[0][9].setIcon(icon);
+        Posiciones[9][9].setIcon(icon);
+        Posiciones[9][0].setIcon(icon);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -203,7 +205,7 @@ public class Board extends javax.swing.JPanel {
                 Fichas[fila][columna].setIcon(juego.JugadorActual.getFicha());
             } else {
                 if (Fichas[fila][columna].getIcon() == null) {
-                    Fichas[fila][columna].setIcon(juego.JugadorActual.getFicha());
+                    Fichas[fila][columna].setIcon(Jugador.Fichas.NOT.getFicha());
                 } else {
                     Fichas[fila][columna].setIcon(null);
                 }
@@ -211,8 +213,7 @@ public class Board extends javax.swing.JPanel {
             }
             emptyBorder();
             juego.players[0].stopCronometer();
-            resetTokens();
-            Sequence();
+            Sequence(true);
             juego.cambioTurno();
             winPoints();
         }
@@ -249,21 +250,34 @@ public class Board extends javax.swing.JPanel {
 
     }
 
-    public void borderAll() {
+    public void borderAllEmpty() {
         emptyBorder();
         for (int f = 0; f < 10; f++) {
             for (int c = 0; c < 10; c++) {
-                Border border = new javax.swing.border.LineBorder(new java.awt.Color(0, 200, 0), 4);
-                Posiciones[f][c].setBorder(border);
+                if(Fichas[f][c].getIcon() == null){
+                    Border border = new javax.swing.border.LineBorder(new java.awt.Color(0, 200, 0), 4);
+                    Posiciones[f][c].setBorder(border);
+                }
             }
-
-            Posiciones[0][0].setBorder(null);
-            Posiciones[0][9].setBorder(null);
-            Posiciones[9][0].setBorder(null);
-            Posiciones[9][9].setBorder(null);
         }
     }
-
+    
+    public void borderAllnotEmpty() {
+        emptyBorder();
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                if(Fichas[f][c].getIcon() != null && !ArraySequence[f][c]){
+                    Border border = new javax.swing.border.LineBorder(new java.awt.Color(0, 200, 0), 4);
+                    Posiciones[f][c].setBorder(border);
+                }
+            }
+        }
+        Posiciones[0][0].setBorder(null);
+        Posiciones[0][9].setBorder(null);
+        Posiciones[9][0].setBorder(null);
+        Posiciones[9][9].setBorder(null);
+    }
+    
     public boolean fullTokens() {
         for (JLabel[] col : Fichas) {
             for (JLabel fila : col) {
@@ -292,21 +306,6 @@ public class Board extends javax.swing.JPanel {
         }
     }
     
-    private void resetTokens(){
-        for(int i = 0; i < ColorGane.length; i++){
-            ColorGane[i] =0;
-        }
-        
-        for(int i = 0; i < 10; i++){
-            for(int c = 0; c < 10; c++){
-                HorizontalSeq[i][c] = false;
-                VerticalSeq[i][c] = false;
-                RDiagonalSeq[i][c] = false;
-                LDiagonalSeq[i][c] = false;
-            }
-        }
-    }
-    
     public boolean SomeoneWins(){
         for(int points: ColorGane){
             if(points >= 2){
@@ -318,47 +317,46 @@ public class Board extends javax.swing.JPanel {
     }
     
     //bordes no detectados en vertical y diagonal a izq
-    private void Sequence(){
-        resetTokens();
+    public void Sequence(boolean bool){
         for(int row = 0; row < 10; row++){
             for(int column = 0; column < 10; column++){
-                switchSequence(row, column);
+                switchSequence(row, column, bool);
             }
         }
     }
     
-    private void switchSequence(int row, int column){
+    private void switchSequence(int row, int column, boolean bool){
         if(Fichas[row][column].getIcon() != null && HorizontalSeq(row, column)){
             if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
-                new Messages.GaneHori((ImageIcon)Fichas[row][column+1].getIcon());
+                if(bool==true){new Messages.GaneHori((ImageIcon)Fichas[row][column+1].getIcon());}
                 switchTokens((ImageIcon)Fichas[row][column+1].getIcon());
             }else{
-                new Messages.GaneHori((ImageIcon)Fichas[row][column].getIcon());
+                if(bool==true){new Messages.GaneHori((ImageIcon)Fichas[row][column].getIcon());}
                 switchTokens((ImageIcon)Fichas[row][column].getIcon());
             }
         }else if(Fichas[row][column].getIcon() != null && VerticalSeq(row, column)){
             if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
-                new Messages.GaneVert((ImageIcon)Fichas[row+1][column].getIcon());
+                if(bool==true){new Messages.GaneVert((ImageIcon)Fichas[row+1][column].getIcon());}
                 switchTokens((ImageIcon)Fichas[row+1][column].getIcon());
             }else{
-                new Messages.GaneVert((ImageIcon)Fichas[row][column].getIcon());
+                if(bool==true){new Messages.GaneVert((ImageIcon)Fichas[row][column].getIcon());}
                 switchTokens((ImageIcon)Fichas[row][column].getIcon());
             }
         }else if(Fichas[row][column].getIcon() != null && DiagonaltoLeftSeq(row, column)){
             if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
-                new Messages.GaneDiag((ImageIcon)Fichas[row+1][column+1].getIcon());
+                if(bool==true){new Messages.GaneDiag((ImageIcon)Fichas[row+1][column+1].getIcon());}
                 switchTokens((ImageIcon)Fichas[row+1][column+1].getIcon());
             }else{
-                new Messages.GaneDiag((ImageIcon)Fichas[row][column].getIcon());
+                if(bool==true){new Messages.GaneDiag((ImageIcon)Fichas[row][column].getIcon());}
                 switchTokens((ImageIcon)Fichas[row][column].getIcon());
             }
             
         }else if(Fichas[row][column].getIcon() != null && DiagonaltoRightSeq(row,column)){
             if(Fichas[row][column].getIcon() == Fichas[0][0].getIcon()){
-                new Messages.GaneDiag((ImageIcon)Fichas[row+1][column-1].getIcon());
+                if(bool==true){new Messages.GaneDiag((ImageIcon)Fichas[row+1][column-1].getIcon());}
                 switchTokens((ImageIcon)Fichas[row+1][column-1].getIcon());
             }else{
-                new Messages.GaneDiag((ImageIcon)Fichas[row][column].getIcon());
+                if(bool==true){new Messages.GaneDiag((ImageIcon)Fichas[row][column].getIcon());}
                 switchTokens((ImageIcon)Fichas[row][column].getIcon());
             }
         }
@@ -371,7 +369,7 @@ public class Board extends javax.swing.JPanel {
                 if(Fichas[i][column].getIcon() == null || (Fichas[i][column].getIcon() != ficha.getIcon()
                    && (ficha.getIcon() != Fichas[0][0].getIcon() && 
                         Fichas[i][column].getIcon() != Fichas[0][0].getIcon())) ||
-                        VerticalSeq[i][column]){
+                        ArraySequence[i][column]){
                     //No se toma como secuencia
                     return false;
                 }
@@ -380,8 +378,7 @@ public class Board extends javax.swing.JPanel {
             
             for(int i = row; i < row +5; i++){
                 if(i != 0 || i != 9){
-                    System.out.println("vertical");
-                    VerticalSeq[i][column] = true;
+                    ArraySequence[i][column] = true;
                 }
             }
             
@@ -399,7 +396,7 @@ public class Board extends javax.swing.JPanel {
                 if(Fichas[row][i].getIcon() == null ||(Fichas[row][i].getIcon() != ficha.getIcon()
                    && (ficha.getIcon() != Fichas[0][0].getIcon() && 
                         Fichas[row][i].getIcon() != Fichas[0][0].getIcon())) ||
-                        HorizontalSeq[row][i]){
+                        ArraySequence[row][i]){
                     //No se toma como secuencia
                     return false;
                 }
@@ -408,7 +405,7 @@ public class Board extends javax.swing.JPanel {
             
             for(int i = column; i < column +5; i++){
                 if(i != 0 || i != 9){
-                    HorizontalSeq[row][i] = true;
+                    ArraySequence[row][i] = true;
                 }
             }
             
@@ -425,7 +422,7 @@ public class Board extends javax.swing.JPanel {
                 if(Fichas[i+row][column+i].getIcon() == null ||(Fichas[row + i][i+ column].getIcon() != Fichas[row][column].getIcon()
                    && (ficha.getIcon() != Fichas[0][0].getIcon() && 
                         Fichas[i+ row][i+column].getIcon() != Fichas[0][0].getIcon())) ||
-                        LDiagonalSeq[row + i][i+ column]){
+                        ArraySequence[row + i][i+ column]){
                     //No se toma como secuencia
                     return false;
                 }
@@ -433,7 +430,7 @@ public class Board extends javax.swing.JPanel {
             }
             
              for(int i = 0; i < 5; i++){
-                 LDiagonalSeq[row + i][i+ column] = true;
+                 ArraySequence[row + i][i+ column] = true;
              }
             return true;
         }catch(Exception e){
@@ -448,7 +445,7 @@ public class Board extends javax.swing.JPanel {
                 if(Fichas[i+row][column-i].getIcon() == null ||(Fichas[row + i][column-i].getIcon() != Fichas[row][column].getIcon()
                   && (ficha.getIcon() != Fichas[0][0].getIcon() && 
                         Fichas[row+i][column-i].getIcon() != Fichas[0][0].getIcon())) ||
-                        RDiagonalSeq[row + i][column-i]){
+                        ArraySequence[row + i][column-i]){
                     //No se toma como secuencia
                     return false;
                 }
@@ -456,7 +453,7 @@ public class Board extends javax.swing.JPanel {
             }
             
              for(int i = 0; i < 5; i++){
-                 RDiagonalSeq[row + i][column-i] = true;
+                 ArraySequence[row + i][column-i] = true;
              }
             return true;
         }catch(Exception e){

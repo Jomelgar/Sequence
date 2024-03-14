@@ -18,6 +18,7 @@ public class Manojo extends javax.swing.JPanel {
     Juego juego;
     JLabel[] Manojo;
     int pos;
+    int power = 0;
     /**
      * Creates new form Manojo
      */
@@ -101,13 +102,31 @@ public class Manojo extends javax.swing.JPanel {
         for(int i= 0; i< Manojo.length; i++){
             if(Manojo[i] == evt.getSource()){
                 emptyBorder();
-                if(Cartas.getImage((ImageIcon)Manojo[i].getIcon()) >=48){
+                if(Cartas.getImage((ImageIcon)Manojo[i].getIcon()) == 48 ||
+                        Cartas.getImage((ImageIcon)Manojo[i].getIcon()) ==50){
                     Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);
                     juego.bloquear = true;
-                    juego.tablero.borderAll();
+                    juego.tablero.borderAllnotEmpty();
                     Manojo[i].setBorder(border);
                     pos = i;
+                    juego.abilityPower(false);
+                }else if(Cartas.getImage((ImageIcon)Manojo[i].getIcon()) ==49 ||
+                        Cartas.getImage((ImageIcon)Manojo[i].getIcon()) ==51){
+                    juego.bloquear = true;
+                    Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);
+                    juego.tablero.borderAllEmpty();
+                    Manojo[i].setBorder(border);
+                    pos = i;
+                    juego.abilityPower(false);
                 }else{
+                    power = GUI.Inicio.usuario.getPower(Cartas.getImage((ImageIcon)Manojo[i].getIcon()));
+                    if(Cartas.getImage((ImageIcon)Manojo[i].getIcon()) >= 40 
+                        && Cartas.getImage((ImageIcon)Manojo[i].getIcon()) <=47 
+                        && power != 0){
+                        juego.abilityPower(true);
+                    }else{
+                        juego.abilityPower(false);
+                    }
                     Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);
                     juego.tablero.detectCard(Cartas.getImage((ImageIcon)Manojo[i].getIcon()));
                     juego.bloquear = false;

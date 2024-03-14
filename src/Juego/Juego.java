@@ -8,15 +8,15 @@ import Jugador.Cartas;
 import javax.swing.border.Border;
 
 public class Juego extends javax.swing.JFrame {
-    Jugador JugadorActual;
-    Jugador[] Jugadores;
+    public Jugador JugadorActual;
+    public Jugador[] Jugadores;
     int size = 0;
     int pos = 1;
     boolean bloquear = false;
     EnTurno[] players;
      NoTurno[] subplayers;
     Cartas[] Deck;
-    Board tablero;
+    public Board tablero;
     Manojo manojo;
     
     public Juego(Jugador[] Jugadores, Cartas[] baraja) {
@@ -71,6 +71,7 @@ public class Juego extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         Contenedor = new javax.swing.JPanel();
         LastCard = new javax.swing.JLabel();
+        Power = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -207,6 +208,20 @@ public class Juego extends javax.swing.JFrame {
 
         Background.add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 240, 320));
 
+        Power.setBackground(new java.awt.Color(102, 102, 102));
+        Power.setForeground(new java.awt.Color(255, 255, 255));
+        Power.setText("Activar Poder");
+        Power.setBorder(null);
+        Power.setBorderPainted(false);
+        Power.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Power.setEnabled(false);
+        Power.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PowerActionPerformed(evt);
+            }
+        });
+        Background.add(Power, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 550, 190, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,6 +246,23 @@ public class Juego extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LastCardMousePressed
 
+    private void PowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerActionPerformed
+        // TODO add your handling code here:
+        switch(manojo.power){
+            case 1:
+                //Robar
+                new Messages.Robo(NamePlayers(), this);
+                break;
+            case 2:
+                //Mover
+                break;
+            case 3:
+                //Intercambiar fichas
+                new Messages.Intercambiar(NamePlayers(), this);
+                break;
+        }
+    }//GEN-LAST:event_PowerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
@@ -241,6 +273,7 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JLabel LastCard;
     private javax.swing.JPanel Mano;
     private javax.swing.JPanel PlayerSlide;
+    private javax.swing.JButton Power;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -308,9 +341,10 @@ public class Juego extends javax.swing.JFrame {
             this.Deck_Countdown.setText(Integer.toString(104-size));
             intercambiarJugadores();
             posicionarJugadores();
-            manojo.setManojo();
             players[0].setCards();
+            manojo.setManojo();
             startCronometer();
+            this.Power.setEnabled(false);
             this.revalidate();
             this.repaint();
         }
@@ -352,5 +386,17 @@ public class Juego extends javax.swing.JFrame {
     
     public void lastCard(){
         LastCard.setIcon(JugadorActual.getUsed(manojo.pos));
+    }
+    
+    public void abilityPower(boolean activator){
+        Power.setEnabled(activator);
+    }
+    
+    private String[] NamePlayers(){
+        String[] names = new String[Jugadores.length];
+        for(int i = 0; i < names.length; i++){
+            names[i] = Jugadores[i].getUsuario().getNombre();
+        }
+        return names;
     }
 }

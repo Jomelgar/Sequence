@@ -18,6 +18,7 @@ public class Usuario implements Serializable{
     private final String Contra;
     private Jugador.Fichas ficha;
     private TipoJuego Tipo;
+    private int[] cardPower;
     ArrayList<String> Historial;
 
     public Usuario(String Nombre, String Contra) {
@@ -27,9 +28,23 @@ public class Usuario implements Serializable{
         Historial = new ArrayList();
         Tipo = TipoJuego.INDIVIDUAL;
         ficha = Jugador.Fichas.RED;
+        cardPower = new int[8];
     }
     
     //Functions 
+    
+    public int getPower(int cardNumber){
+        for(int i = 40; i < 48;i++){
+            if(i == cardNumber){
+                return cardPower[i-40];
+            }
+        }
+        return 0;
+    }
+    
+    public void setPower(int cardNumber, int selection){
+        cardPower[cardNumber-40] = selection;
+    }
     public void addPlay(int points){
         Historial.add("Nombre: " + Nombre + " Fecha: " + Calendar.getInstance().toString() + " Puntos: " + points);
     }
@@ -58,7 +73,11 @@ public class Usuario implements Serializable{
     }
     
     
-    //Getters
+    //Getters 
+    public int[] getCardPower() {
+        return cardPower;
+    }
+
     public Calendar getFecha() {
         return Fecha;
     }
