@@ -101,9 +101,9 @@ public class Intercambiar extends javax.swing.JDialog {
         // TODO add your handling code here:
         ImageIcon ficha = getColor();
         intercambiar(ficha);
-        juego.cambioTurno(false,true);
         juego.tablero.Sequence(true);
         juego.tablero.winPoints();
+        juego.cambioTurno(false,true);
         juego.tablero.emptyBorder();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
