@@ -45,6 +45,7 @@ public class Usuario implements Serializable{
     public void setPower(int cardNumber, int selection){
         cardPower[cardNumber-40] = selection;
     }
+    
     public void addPlay(int points){
         Historial.add("Nombre: " + Nombre + " Fecha: " + Calendar.getInstance().toString() + " Puntos: " + points);
     }

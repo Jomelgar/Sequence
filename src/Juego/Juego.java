@@ -334,6 +334,7 @@ public class Juego extends javax.swing.JFrame {
                 lastCard(JugadorActual.getUsed(manojo.pos));
         }
         if(tablero.fullTokens() || tablero.SomeoneWins()){
+            
             GUI.Menu inicio = new GUI.Menu();
             inicio.setLocationRelativeTo(null);
             inicio.setVisible(true);
