@@ -5,6 +5,9 @@
 package GUI;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -228,6 +231,13 @@ public class Register extends javax.swing.JPanel {
             && (!txtPassword.getText().equals("Nombre de Usuario...") || !txtPassword.getText().trim().isEmpty())){
             if(Inicio.ManagerAcc.addUser(txtUser.getText(), txtPassword.getText())){
                 JOptionPane.showMessageDialog(inicio, "Usuario " + txtUser.getText() + " creado.");
+                try {
+                    Inicio.writeData();
+                } catch (IOException ex) {
+                    Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(inicio, "ERROR: Ese nombre de usuario ya existe");
             }

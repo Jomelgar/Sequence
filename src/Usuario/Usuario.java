@@ -47,7 +47,7 @@ public class Usuario implements Serializable{
     }
     
     public void addPlay(int points){
-        Historial.add("Nombre: " + Nombre + " Fecha: " + Calendar.getInstance().toString() + " Puntos: " + points);
+        Historial.add("Nombre: " + Nombre + " Fecha: " + Calendar.getInstance().getTime() + " Puntos: " + points);
     }
     
     public String History(){

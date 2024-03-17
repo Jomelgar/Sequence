@@ -333,12 +333,20 @@ public class Juego extends javax.swing.JFrame {
         if(lastCard){
                 lastCard(JugadorActual.getUsed(manojo.pos));
         }
-        if(tablero.fullTokens() || tablero.SomeoneWins()){
-            
+        boolean wins = tablero.SomeoneWins();
+        boolean due = tablero.fullTokens();
+        if( due || wins){
+            if(due && !wins){
+                JOptionPane.showMessageDialog(null, "Empate.");
+                for (int i = 0; i < Jugadores.length; i++) {
+                    Jugadores[i].getUsuario().addPlay(0);
+                }
+            }
             GUI.Menu inicio = new GUI.Menu();
             inicio.setLocationRelativeTo(null);
             inicio.setVisible(true);
             this.dispose();
+            return;
         }else{
             if(!Carta){
                 DrawCard(JugadorActual, manojo.getSelectCard());

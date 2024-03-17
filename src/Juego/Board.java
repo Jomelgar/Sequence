@@ -40,11 +40,12 @@ public class Board extends javax.swing.JPanel {
         this.juego = juego;
         for (int f = 0; f < 10; f++) {
             for (int c = 0; c < 10; c++) {
-                
+                ArraySequence[f][c] = false;
                 Posiciones[f][c] = new JLabel();
                 Posiciones[f][c].setBounds(c * 70, f * 70, 70, 70);
                 Posiciones[f][c].setBorder(null);
                 Fichas[f][c] = new JLabel();
+                Fichas[f][c].setIcon(null);
                 Fichas[f][c].setBounds(c * 70, f * 70, 70, 70);
                 Posiciones[f][c].addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mousePressed(java.awt.event.MouseEvent e) {
@@ -55,6 +56,10 @@ public class Board extends javax.swing.JPanel {
                 add(Posiciones[f][c]);
 
             }
+        }
+        
+        for (int i = 0; i < ColorGane.length; i++) {
+            ColorGane[i] = 0;
         }
         // Fila 1
         Posiciones[0][1].setIcon(Cartas.P2.getTablero());
@@ -328,11 +333,23 @@ public class Board extends javax.swing.JPanel {
     }
     
     public boolean SomeoneWins(){
+        int contador = 0;
         for(int points: ColorGane){
+            
             if(points >= 2){
                 //Aqui toca tirar el registro de ganes
+                System.out.println("true");
+                new Messages.Gane(Jugador.Fichas.values()[contador].getFicha());
+                for (int i = 0; i < juego.Jugadores.length; i++) {
+                    if (juego.Jugadores[i].getFicha() == Jugador.Fichas.values()[contador].getFicha()) {
+                        juego.Jugadores[i].getUsuario().addPlay(3);
+                    }else{
+                        juego.Jugadores[i].getUsuario().addPlay(0);
+                    }
+                }
                 return true;
             }
+            contador++;
         }
         return false;
     }
