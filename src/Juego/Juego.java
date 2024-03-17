@@ -5,6 +5,7 @@
 package Juego;
 import Jugador.Jugador;
 import Jugador.Cartas;
+import java.awt.AWTEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -210,7 +211,8 @@ public class Juego extends javax.swing.JFrame {
 
         Background.add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 240, 320));
 
-        Power.setBackground(new java.awt.Color(0, 0, 102));
+        Power.setBackground(new java.awt.Color(255, 255, 0));
+        Power.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         Power.setForeground(new java.awt.Color(255, 255, 255));
         Power.setText("Activar Poder");
         Power.setBorder(null);
@@ -345,6 +347,7 @@ public class Juego extends javax.swing.JFrame {
             GUI.Menu inicio = new GUI.Menu();
             inicio.setLocationRelativeTo(null);
             inicio.setVisible(true);
+            players[0].stopCronometer();
             this.dispose();
             return;
         }else{
