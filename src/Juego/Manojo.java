@@ -125,6 +125,7 @@ public class Manojo extends javax.swing.JPanel {
                         && power != 0){
                         juego.abilityPower(true);
                     }else{
+                        juego.tablero.movimientoActivado=false;
                         juego.abilityPower(false);
                     }
                     Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);

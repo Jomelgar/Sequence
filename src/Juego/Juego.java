@@ -5,6 +5,7 @@
 package Juego;
 import Jugador.Jugador;
 import Jugador.Cartas;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
@@ -239,7 +240,7 @@ public class Juego extends javax.swing.JFrame {
 
     private void CardsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CardsMousePressed
         // TODO add your handling code here:
-        cambioTurno(false);
+        cambioTurno(false,false);
         this.Deck_Countdown.setText(Integer.toString(104-size));
     }//GEN-LAST:event_CardsMousePressed
 
@@ -328,8 +329,10 @@ public class Juego extends javax.swing.JFrame {
         }
     }
     // Verificar cuando llegue a 104.
-    public void cambioTurno(boolean Carta) {
-        lastCard();
+    public void cambioTurno(boolean Carta, boolean lastCard) {
+        if(lastCard){
+                lastCard(JugadorActual.getUsed(manojo.pos));
+        }
         if(tablero.fullTokens() || tablero.SomeoneWins()){
             GUI.Menu inicio = new GUI.Menu();
             inicio.setLocationRelativeTo(null);
@@ -391,8 +394,8 @@ public class Juego extends javax.swing.JFrame {
             size++;
     }
     
-    public void lastCard(){
-        LastCard.setIcon(JugadorActual.getUsed(manojo.pos));
+    public void lastCard(ImageIcon Used){
+        LastCard.setIcon(Used);
     }
     
     public void abilityPower(boolean activator){

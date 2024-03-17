@@ -207,6 +207,7 @@ public class Board extends javax.swing.JPanel {
         if (card.getBorder() != null) {
             if(!movimientoActivado || !UsersToken()){
                 if(mover){
+                    Fichas[filaMover][columnaMover].setIcon(null);
                     mover =false;
                 }
                 if (!juego.bloquear) {
@@ -222,7 +223,7 @@ public class Board extends javax.swing.JPanel {
                 emptyBorder();
                 juego.players[0].stopCronometer();
                 Sequence(true);
-                juego.cambioTurno(false);
+                juego.cambioTurno(false,true);
                 movimientoActivado = false;
                 mover = false; 
                 winPoints();
@@ -233,6 +234,9 @@ public class Board extends javax.swing.JPanel {
                 movimientoActivado=false;
                 borderAllEmpty();
             }
+        }else{
+            mover = false; 
+            movimientoActivado=false;
         }
     }
     

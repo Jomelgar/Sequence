@@ -101,9 +101,10 @@ public class Robo extends javax.swing.JDialog {
         int index = Jugadores.getSelectedIndex();
         int random = new Random().nextInt(juego.Jugadores[index].getManojo().length);
         int specialCard = juego.manojo.pos;
+        juego.lastCard(juego.JugadorActual.getManojo()[specialCard].getUltimaCarta());
         juego.JugadorActual.setManojo(juego.Jugadores[index].getManojo()[random],specialCard);
         juego.DrawCard(juego.Jugadores[index], random);
-        juego.cambioTurno(true);
+        juego.cambioTurno(true,false);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

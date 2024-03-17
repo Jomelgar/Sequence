@@ -6,6 +6,9 @@ package GUI;
 
 import Jugador.Fichas;
 import Usuario.TipoJuego;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -268,6 +271,13 @@ public class Config extends javax.swing.JPanel {
         }else{
             Inicio.usuario.setTipo(TipoJuego.GRUPAL);
         }
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_TipeGameItemStateChanged
 
     private void ColorTokenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ColorTokenItemStateChanged
@@ -287,46 +297,118 @@ public class Config extends javax.swing.JPanel {
                 break;
         }
         setDemonsToken();
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ColorTokenItemStateChanged
 
     private void CBReyPicaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyPicaItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(40, CBReyPica.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReyPicaItemStateChanged
 
     private void CBReyDiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyDiaItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(41, CBReyDia.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReyDiaItemStateChanged
 
     private void CBReyCoraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyCoraItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(42, CBReyCora.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReyCoraItemStateChanged
 
     private void CBReyTrebolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyTrebolItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(43, CBReyTrebol.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReyTrebolItemStateChanged
 
     private void CBReinaPicaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaPicaItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(44, CBReinaPica.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReinaPicaItemStateChanged
 
     private void CBReinaDiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaDiaItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(45, CBReinaDia.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReinaDiaItemStateChanged
 
     private void CBReinaCoraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaCoraItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(46, CBReinaCora.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReinaCoraItemStateChanged
 
     private void CBReinaTrebolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReinaTrebolItemStateChanged
         // TODO add your handling code here:
         Inicio.usuario.setPower(47, CBReinaTrebol.getSelectedIndex());
+        
+        try {
+            Inicio.writeData();
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CBReinaTrebolItemStateChanged
 
 

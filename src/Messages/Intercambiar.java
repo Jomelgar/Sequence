@@ -99,9 +99,9 @@ public class Intercambiar extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ImageIcon ficha = juego.Jugadores[Jugadores.getSelectedIndex()].getFicha();
+        ImageIcon ficha = getColor();
         intercambiar(ficha);
-        juego.cambioTurno(false);
+        juego.cambioTurno(false,true);
         juego.tablero.Sequence(true);
         juego.tablero.winPoints();
         juego.tablero.emptyBorder();
@@ -125,5 +125,16 @@ public class Intercambiar extends javax.swing.JDialog {
                 }
             }
         }
+    }
+    
+    ImageIcon getColor(){
+        if(!Jugadores.getSelectedItem().equals(juego.Jugadores[Jugadores.getSelectedIndex()].getUsuario().getNombre())){
+            if(Jugadores.getSelectedItem().equals(juego.Jugadores[Jugadores.getSelectedIndex()+1].getUsuario().getNombre())){
+               return juego.Jugadores[Jugadores.getSelectedIndex()+1].getFicha(); 
+            }else{
+               return juego.Jugadores[Jugadores.getSelectedIndex()-1].getFicha(); 
+            }
+        }
+        return juego.Jugadores[Jugadores.getSelectedIndex()].getFicha();
     }
 }
