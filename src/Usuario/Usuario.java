@@ -17,7 +17,7 @@ public class Usuario implements Serializable{
     private final String Nombre;
     private final String Contra;
     private Jugador.Fichas ficha;
-    private TipoJuego Tipo;
+    private int CantJugadores;
     private int[] cardPower;
     ArrayList<String> Historial;
 
@@ -26,7 +26,7 @@ public class Usuario implements Serializable{
         this.Contra = Contra;
         Fecha = Calendar.getInstance();
         Historial = new ArrayList();
-        Tipo = TipoJuego.INDIVIDUAL;
+        CantJugadores = 2;
         ficha = Jugador.Fichas.RED;
         cardPower = new int[8];
     }
@@ -65,8 +65,8 @@ public class Usuario implements Serializable{
     }
     
     //Setters
-    public void setTipo(TipoJuego tipo){
-        this.Tipo= tipo;
+    public void setTipo(int tipo){
+        this.CantJugadores= tipo;
     }
 
     public void setFicha(Fichas ficha) {
@@ -96,8 +96,8 @@ public class Usuario implements Serializable{
         return ficha;
     }
 
-    public TipoJuego getTipo() {
-        return Tipo;
+    public int getCant() {
+        return this.CantJugadores;
     }
     
     

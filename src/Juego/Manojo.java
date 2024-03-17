@@ -48,6 +48,11 @@ public class Manojo extends javax.swing.JPanel {
                         Manojo[i] = new JLabel();
                         Manojo[i].setBounds(25+100*i + 25*i,100,100,100);
                         Manojo[i].setIcon(Cartas.C2.getManojo());
+                        Manojo[i].addMouseListener(new java.awt.event.MouseAdapter(){
+                            public void mousePressed(java.awt.event.MouseEvent e){
+                                SelectedCard(e);
+                            }
+                        });
                         add(Manojo[i]);
                     }
                 }else{

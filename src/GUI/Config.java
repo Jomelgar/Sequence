@@ -5,7 +5,6 @@
 package GUI;
 
 import Jugador.Fichas;
-import Usuario.TipoJuego;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +21,23 @@ public class Config extends javax.swing.JPanel {
     public Config() {
         initComponents();
         txtUser.setText(Inicio.usuario.getNombre());
-        TipeGame.setSelectedIndex(Inicio.usuario.getTipo().getIndex());
+        switch(Inicio.usuario.getCant()){
+            case 2:
+                TipeGame.setSelectedIndex(0);
+                break;
+            case 3:
+                TipeGame.setSelectedIndex(1);
+                break;
+            case 4:
+                TipeGame.setSelectedIndex(2);
+                break;
+            case 6:
+                TipeGame.setSelectedIndex(3);
+                break;
+            case 8:
+                TipeGame.setSelectedIndex(4);
+                break;
+        }
         switch(Inicio.usuario.getColor()){
             case RED:
                 ColorToken.setSelectedIndex(0);
@@ -64,7 +79,6 @@ public class Config extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         TipeGame = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         ColorToken = new javax.swing.JComboBox<>();
         Muestra_Ficha = new javax.swing.JLabel();
@@ -86,6 +100,7 @@ public class Config extends javax.swing.JPanel {
         CBReinaTrebol = new javax.swing.JComboBox<>();
         CBReyCora = new javax.swing.JComboBox<>();
         CBReyTrebol = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,7 +128,7 @@ public class Config extends javax.swing.JPanel {
         TipeGame.setBackground(new java.awt.Color(204, 204, 204));
         TipeGame.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         TipeGame.setForeground(new java.awt.Color(0, 0, 0));
-        TipeGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INDIVIDUAL", "GRUPAL" }));
+        TipeGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "6", "8" }));
         TipeGame.setOpaque(true);
         TipeGame.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -121,11 +136,6 @@ public class Config extends javax.swing.JPanel {
             }
         });
         add(TipeGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 229, 160, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Tipo de Juego:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 198, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -262,15 +272,17 @@ public class Config extends javax.swing.JPanel {
             }
         });
         add(CBReyTrebol, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 140, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Cantidad de Jugadores:");
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 202, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TipeGameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TipeGameItemStateChanged
         // TODO add your handling code here:
-        if(TipeGame.getSelectedItem().toString().equals("INDIVIDUAL")){
-            Inicio.usuario.setTipo(TipoJuego.INDIVIDUAL);
-        }else{
-            Inicio.usuario.setTipo(TipoJuego.GRUPAL);
-        }
+        Inicio.usuario.setTipo(Integer.parseInt((String)TipeGame.getSelectedItem()));
+        System.out.println(Inicio.usuario.getCant());
         try {
             Inicio.writeData();
         } catch (IOException ex) {
@@ -430,9 +442,9 @@ public class Config extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

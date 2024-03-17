@@ -4,7 +4,6 @@
  */
 package GUI;
 
-import Usuario.TipoJuego;
 import java.text.SimpleDateFormat;
 
 /**

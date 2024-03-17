@@ -16,23 +16,42 @@ public class Grupal extends javax.swing.JPanel {
     public ArrayList<String> Team1 = new ArrayList();
     public ArrayList<String> Team2 = new ArrayList();
     public ArrayList<String> Team3 = new ArrayList();
-     int Cantidad;
+    int Cantidad;
     public Grupal() {
         initComponents();
         setComboUsers();
-        Team1.add(Inicio.usuario.getNombre());
-        setListTeam1();
-        setListTeam2();
-        setListTeam3();
-        Cantidad = 2;
-        ComboTeam2.setSelectedIndex(1);
-        ComboTeam3.setSelectedIndex(2);
-        Equipo3.setVisible(false);
+         Equipo3.setVisible(false);
             ComboTeam3.setVisible(false);
             jScrollPane3.setVisible(false);
             txtTeam3.setVisible(false);
             Team.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipo 1", "Equipo 2"}));
-        
+        Team1.add(Inicio.usuario.getNombre());
+        setListTeam1();
+        setListTeam2();
+        setListTeam3();
+        Cantidad = setCant();
+        switch(Inicio.usuario.getColor()){
+            case RED:
+                ComboTeam1.setSelectedIndex(0);
+                ComboTeam2.setSelectedIndex(1);
+                ComboTeam3.setSelectedIndex(2);
+                break;
+            case BLUE:
+                ComboTeam1.setSelectedIndex(1);
+                ComboTeam2.setSelectedIndex(2);
+                ComboTeam3.setSelectedIndex(3);
+                break;
+            case YELLOW:
+                ComboTeam1.setSelectedIndex(2);
+                ComboTeam2.setSelectedIndex(1);
+                ComboTeam3.setSelectedIndex(3);
+                break;
+            case GREEN:
+                ComboTeam1.setSelectedIndex(3);
+                ComboTeam2.setSelectedIndex(0);
+                ComboTeam3.setSelectedIndex(1);
+                break;
+        }
     }
 
     /**
@@ -45,8 +64,6 @@ public class Grupal extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        NumPlayers = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtTeam3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,6 +80,7 @@ public class Grupal extends javax.swing.JPanel {
         ComboTeam1 = new javax.swing.JComboBox<>();
         ComboTeam3 = new javax.swing.JComboBox<>();
         Add = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -71,21 +89,6 @@ public class Grupal extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Equipo 2:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Cantidad de Jugadores:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 21, 202, -1));
-
-        NumPlayers.setBackground(new java.awt.Color(255, 204, 204));
-        NumPlayers.setForeground(new java.awt.Color(0, 0, 0));
-        NumPlayers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "6", "8" }));
-        NumPlayers.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                NumPlayersItemStateChanged(evt);
-            }
-        });
-        add(NumPlayers, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 23, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -134,10 +137,10 @@ public class Grupal extends javax.swing.JPanel {
         });
         add(Players, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Equipo:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
+        jLabel6.setText("Seleccion de Equipos:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 480, -1));
 
         Team.setBackground(new java.awt.Color(255, 204, 204));
         Team.setForeground(new java.awt.Color(0, 0, 0));
@@ -189,35 +192,16 @@ public class Grupal extends javax.swing.JPanel {
             }
         });
         add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Equipo:");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void PlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayersActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PlayersActionPerformed
-
-    private void NumPlayersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_NumPlayersItemStateChanged
-        // TODO add your handling code here:
-        if(NumPlayers.getSelectedIndex() != 2){
-            Cantidad = 4;
-        }else{
-            Cantidad = 2;
-        }
-        
-        if(NumPlayers.getSelectedIndex() == 1){
-            Equipo3.setVisible(true);
-            ComboTeam3.setVisible(true);
-            jScrollPane3.setVisible(true);
-            txtTeam3.setVisible(true);
-            Team.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipo 1", "Equipo 2", "Equipo 3" }));
-        }else{
-            Team3 = new ArrayList();
-            Equipo3.setVisible(false);
-            ComboTeam3.setVisible(false);
-            jScrollPane3.setVisible(false);
-            txtTeam3.setVisible(false);
-            Team.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipo 1", "Equipo 2"}));
-        }
-    }//GEN-LAST:event_NumPlayersItemStateChanged
 
     private void ComboTeam1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboTeam1ItemStateChanged
         // TODO add your handling code here:
@@ -277,14 +261,13 @@ public class Grupal extends javax.swing.JPanel {
     private javax.swing.JList<String> Equipo1;
     private javax.swing.JList<String> Equipo2;
     private javax.swing.JList<String> Equipo3;
-    private javax.swing.JComboBox<String> NumPlayers;
     private javax.swing.JComboBox<String> Players;
     private javax.swing.JComboBox<String> Team;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -343,12 +326,17 @@ public class Grupal extends javax.swing.JPanel {
     }
     
     boolean diffTeams(){
-        if(ComboTeam3.isVisible()){
-            return Team1.size() == 2 && Team2.size() == 2 && Team3.size() == 2;
-        }else if(Cantidad == 2){
-            return Team1.size() == 2 && Team2.size() == 2;
-        }else{
-            return Team1.size() == 4 && Team2.size() == 4;
+        switch(Inicio.usuario.getCant()){
+            case 2:
+                return Team1.size() == 1 && Team2.size()== 1;
+            case 3:
+                return Team1.size() == 1 && Team2.size()== 1 && Team3.size() == 1;
+            case 4:
+                return Team1.size() == 2 && Team2.size()== 2;
+            case 6:
+                return Team1.size() == 2 && Team2.size()== 2 && Team3.size() == 2;
+            default:
+                return Team1.size() == 4 && Team2.size()== 4;
         }
     }
     
@@ -411,5 +399,30 @@ public class Grupal extends javax.swing.JPanel {
         }
         }
         return listado;
+    }
+    
+    int setCant(){
+        switch(Inicio.usuario.getCant()){
+            case 2:
+                return 1;
+            case 3:
+                reveal3rdTeam();
+                return 1;
+            case 4:
+                return 2;
+            case 6:
+                reveal3rdTeam();
+                return 2;
+            default:
+                return 4;  
+        }
+    }
+    
+    void reveal3rdTeam(){
+        Equipo3.setVisible(true);
+            ComboTeam3.setVisible(true);
+            jScrollPane3.setVisible(true);
+            txtTeam3.setVisible(true);
+            Team.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipo 1", "Equipo 2", "Equipo 3"}));
     }
 }

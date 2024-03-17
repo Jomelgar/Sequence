@@ -5,7 +5,6 @@
 package GUI;
 
 import Jugador.Fichas;
-import Usuario.TipoJuego;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -13,8 +12,6 @@ import javax.swing.JOptionPane;
  * @author jomel
  */
 public class Jugar extends javax.swing.JPanel {
-    
-    Individual individual;
     Grupal grupal;
     Menu menu;
     /**
@@ -95,18 +92,10 @@ public class Jugar extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(Inicio.usuario.getTipo() == TipoJuego.INDIVIDUAL){
-            if(individual.Users.size() > 1){
-                this.InicioJuego(individual.Users.toArray(new String[individual.Users.size()]));
-            }else{
-                JOptionPane.showMessageDialog(null, "ERROR: La cantidad de jugadores elegida no permite jugar.");
-            }
-        }else{
-            if(grupal.diffTeams() && grupal.diffTokens()){
-                
-                InicioJuego(grupal.getTeams().toArray(new String[grupal.getTeams().size()]));
-            }
+        if(grupal.diffTeams() && grupal.diffTokens()){
+            InicioJuego(grupal.getTeams().toArray(new String[grupal.getTeams().size()]));
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -122,14 +111,10 @@ public class Jugar extends javax.swing.JPanel {
 
     void AgregarPanel(){
         javax.swing.JPanel Panel;
-        if(Inicio.usuario.getTipo() == TipoJuego.INDIVIDUAL){
-            individual = new Individual();
-            Panel = individual;
-            
-        }else{
+        
             grupal = new Grupal();
             Panel = grupal;
-        }
+        
         
         Panel.setSize(450, 260);
         Panel.setLocation(0, 0);
@@ -167,19 +152,7 @@ public class Jugar extends javax.swing.JPanel {
         }
         for(int i =0; i< jugadores.length; i++){
             Usuario.Usuario usuario = Inicio.ManagerAcc.searchUser(nombres[i]);
-            if(Inicio.usuario.getTipo() == TipoJuego.INDIVIDUAL){
-                if(i != 0 && !fichas.contains(usuario.getColor())){
-                usuario.setFicha(fichas.get(0));
-                }
-                fichas.remove(fichas.indexOf(usuario.getColor()));
-
-                if(fichas.isEmpty()){
-                    fichas.add(Fichas.RED);
-                    fichas.add(Fichas.BLUE);
-                    fichas.add(Fichas.YELLOW);
-                    fichas.add(Fichas.GREEN);
-                }
-                }
+            
                 jugadores[i] = new Jugador.Jugador(mano,usuario);
         }
         
