@@ -101,7 +101,7 @@ public class Intercambiar extends javax.swing.JDialog {
         // TODO add your handling code here:
         ImageIcon ficha = juego.Jugadores[Jugadores.getSelectedIndex()].getFicha();
         intercambiar(ficha);
-        juego.cambioTurno();
+        juego.cambioTurno(false);
         juego.tablero.Sequence(true);
         juego.tablero.winPoints();
         juego.tablero.emptyBorder();

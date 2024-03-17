@@ -4,6 +4,8 @@
  */
 package Messages;
 
+import java.util.Random;
+
 /**
  *
  * @author jomel
@@ -96,7 +98,13 @@ public class Robo extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        int index = Jugadores.getSelectedIndex();
+        int random = new Random().nextInt(juego.Jugadores[index].getManojo().length);
+        int specialCard = juego.manojo.pos;
+        juego.JugadorActual.setManojo(juego.Jugadores[index].getManojo()[random],specialCard);
+        juego.DrawCard(juego.Jugadores[index], random);
+        juego.cambioTurno(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -107,4 +115,5 @@ public class Robo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }

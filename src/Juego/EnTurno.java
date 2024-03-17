@@ -90,7 +90,7 @@ public class EnTurno extends javax.swing.JPanel{
        this.Timer.setText(txt);
        
        if(time == 0 && timer.isRunning()){
-           juego.cambioTurno();
+           juego.cambioTurno(true);
            timer.stop();
        }
    }

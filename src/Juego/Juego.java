@@ -5,6 +5,7 @@
 package Juego;
 import Jugador.Jugador;
 import Jugador.Cartas;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 public class Juego extends javax.swing.JFrame {
@@ -17,7 +18,7 @@ public class Juego extends javax.swing.JFrame {
      NoTurno[] subplayers;
     Cartas[] Deck;
     public Board tablero;
-    Manojo manojo;
+    public Manojo manojo;
     
     public Juego(Jugador[] Jugadores, Cartas[] baraja) {
         initComponents();
@@ -208,7 +209,7 @@ public class Juego extends javax.swing.JFrame {
 
         Background.add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 240, 320));
 
-        Power.setBackground(new java.awt.Color(102, 102, 102));
+        Power.setBackground(new java.awt.Color(0, 0, 102));
         Power.setForeground(new java.awt.Color(255, 255, 255));
         Power.setText("Activar Poder");
         Power.setBorder(null);
@@ -238,7 +239,7 @@ public class Juego extends javax.swing.JFrame {
 
     private void CardsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CardsMousePressed
         // TODO add your handling code here:
-        cambioTurno();
+        cambioTurno(false);
         this.Deck_Countdown.setText(Integer.toString(104-size));
     }//GEN-LAST:event_CardsMousePressed
 
@@ -255,6 +256,10 @@ public class Juego extends javax.swing.JFrame {
                 break;
             case 2:
                 //Mover
+                JOptionPane.showMessageDialog(null, "Mover fichas: Seleccione una ficha "
+                        + "\ny muevala hasta donde quiera.");
+                tablero.movimientoActivado = true;
+                tablero.BlueBoard(JugadorActual.getFicha());
                 break;
             case 3:
                 //Intercambiar fichas
@@ -323,7 +328,7 @@ public class Juego extends javax.swing.JFrame {
         }
     }
     // Verificar cuando llegue a 104.
-    public void cambioTurno() {
+    public void cambioTurno(boolean Carta) {
         lastCard();
         if(tablero.fullTokens() || tablero.SomeoneWins()){
             GUI.Menu inicio = new GUI.Menu();
@@ -331,7 +336,9 @@ public class Juego extends javax.swing.JFrame {
             inicio.setVisible(true);
             this.dispose();
         }else{
-            DrawCard();
+            if(!Carta){
+                DrawCard(JugadorActual, manojo.getSelectCard());
+            }
             JugadorActual = Jugadores[pos];
             pos++;
             if (pos == Jugadores.length) {
@@ -375,12 +382,12 @@ public class Juego extends javax.swing.JFrame {
         
     }
     
-    public void DrawCard(){
+    public void DrawCard(Jugador jugador, int lugar){
         if(size > 103 || Deck[size] == null){
                 System.out.println("se hallo null");
                 refreshDeck();
             }
-            JugadorActual.setManojo(Deck[size], manojo.getSelectCard());
+                jugador.setManojo(Deck[size],lugar);
             size++;
     }
     
@@ -393,9 +400,15 @@ public class Juego extends javax.swing.JFrame {
     }
     
     private String[] NamePlayers(){
-        String[] names = new String[Jugadores.length];
+        String[] names = new String[Jugadores.length-1];
+        boolean suma = false;
         for(int i = 0; i < names.length; i++){
-            names[i] = Jugadores[i].getUsuario().getNombre();
+            if(suma == true || Jugadores[i] == JugadorActual){
+                names[i] = Jugadores[i+1].getUsuario().getNombre();
+                suma = true;
+            }else{
+                names[i] = Jugadores[i].getUsuario().getNombre();
+            }
         }
         return names;
     }

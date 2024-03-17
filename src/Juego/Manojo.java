@@ -17,7 +17,7 @@ import javax.swing.border.Border;
 public class Manojo extends javax.swing.JPanel {
     Juego juego;
     JLabel[] Manojo;
-    int pos;
+    public int pos;
     int power = 0;
     /**
      * Creates new form Manojo

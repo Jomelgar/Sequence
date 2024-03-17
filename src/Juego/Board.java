@@ -21,6 +21,10 @@ public class Board extends javax.swing.JPanel {
     JLabel[][] Posiciones = new JLabel[10][10];
     public JLabel[][] Fichas = new JLabel[10][10];
     public boolean[][] ArraySequence = new boolean[10][10];
+    boolean movimientoActivado;
+    boolean mover;
+    int filaMover;
+    int columnaMover;
     
     /*
     0- Rojo
@@ -201,21 +205,34 @@ public class Board extends javax.swing.JPanel {
 
     public void CardInteraction(JLabel card, int fila, int columna) {
         if (card.getBorder() != null) {
-            if (!juego.bloquear) {
-                Fichas[fila][columna].setIcon(juego.JugadorActual.getFicha());
-            } else {
-                if (Fichas[fila][columna].getIcon() == null) {
-                    Fichas[fila][columna].setIcon(Jugador.Fichas.NOT.getFicha());
-                } else {
-                    Fichas[fila][columna].setIcon(null);
+            if(!movimientoActivado || !UsersToken()){
+                if(mover){
+                    mover =false;
                 }
-                juego.bloquear = false;
+                if (!juego.bloquear) {
+                    Fichas[fila][columna].setIcon(juego.JugadorActual.getFicha());
+                } else {
+                    if (Fichas[fila][columna].getIcon() == null) {
+                        Fichas[fila][columna].setIcon(Jugador.Fichas.NOT.getFicha());
+                    } else {
+                        Fichas[fila][columna].setIcon(null);
+                }
+                    juego.bloquear = false;
+                }
+                emptyBorder();
+                juego.players[0].stopCronometer();
+                Sequence(true);
+                juego.cambioTurno(false);
+                movimientoActivado = false;
+                mover = false; 
+                winPoints();
+            }else{
+                filaMover = fila;
+                columnaMover = columna;
+                mover = true; 
+                movimientoActivado=false;
+                borderAllEmpty();
             }
-            emptyBorder();
-            juego.players[0].stopCronometer();
-            Sequence(true);
-            juego.cambioTurno();
-            winPoints();
         }
     }
     
@@ -429,9 +446,9 @@ public class Board extends javax.swing.JPanel {
                 ficha = Fichas[row + i][i+ column];
             }
             
-             for(int i = 0; i < 5; i++){
+            for(int i = 0; i < 5; i++){
                  ArraySequence[row + i][i+ column] = true;
-             }
+            }
             return true;
         }catch(Exception e){
             return false;
@@ -459,6 +476,30 @@ public class Board extends javax.swing.JPanel {
         }catch(Exception e){
             return false;
         }
+    }
+    
+    
+    public void BlueBoard(ImageIcon ficha){
+       emptyBorder();
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                if((ImageIcon)Fichas[f][c].getIcon() == ficha && ArraySequence[f][c] == false){
+                    Border border = new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 200), 4);
+                    Posiciones[f][c].setBorder(border);
+                }
+            }
+        }
+    }
+    
+    boolean UsersToken(){
+         for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                if((ImageIcon)Fichas[f][c].getIcon() == juego.JugadorActual.getFicha()){
+                    return true;
+                }
+            }
+         }
+        return false;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
