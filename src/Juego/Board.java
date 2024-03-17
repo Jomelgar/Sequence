@@ -328,11 +328,21 @@ public class Board extends javax.swing.JPanel {
     }
     
     public boolean SomeoneWins(){
+        int contador = 0;
         for(int points: ColorGane){
+            
             if(points >= 2){
                 //Aqui toca tirar el registro de ganes
+                for (int i = 0; i < juego.Jugadores.length; i++) {
+                    if (juego.Jugadores[i].getFicha() == Jugador.Fichas.values()[contador].getFicha()) {
+                        juego.Jugadores[i].getUsuario().addPlay(3);
+                    }else{
+                        juego.Jugadores[i].getUsuario().addPlay(0);
+                    }
+                }
                 return true;
             }
+            contador++;
         }
         return false;
     }
