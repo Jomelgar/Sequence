@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author jomel
+ * @author harle
  */
 public class GestorUsuarios implements Serializable{
     private ArrayList<Usuario> Usuarios;

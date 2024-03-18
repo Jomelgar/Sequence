@@ -23,7 +23,7 @@ public class Menu extends javax.swing.JFrame {
     int XMouse;
     int YMouse;
     Timer timer;
-    DrawerController Sidebar;
+    DrawerController Sidebar;//Declaracion del side bar
     
     public Menu() {
         initComponents();
@@ -31,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
         timer = new Timer(1000, (ActionEvent e) ->{
             Time();
         });
-        Sidebar = Drawer.newDrawer(this).addChild(new SideBar(this)).build();
+        Sidebar = Drawer.newDrawer(this).addChild(new SideBar(this)).build();//Inicializacion del la barra
         timer.start();
         AgregarPanel(new Jugar(this));
     }
@@ -241,7 +241,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void SideBarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SideBarMouseEntered
         // TODO add your handling code here:
-        Sidebar.show();
+        Sidebar.show();//Se coloca el mouse sobre y muestra la barra
     }//GEN-LAST:event_SideBarMouseEntered
 
 

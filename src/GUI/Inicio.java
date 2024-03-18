@@ -18,7 +18,7 @@ import javax.swing.Timer;
 
 /**
  *
- * @author jomel
+ * @author harle
  */
 public class Inicio extends javax.swing.JFrame {
     
@@ -30,12 +30,13 @@ public class Inicio extends javax.swing.JFrame {
     
     public Inicio() {
         initComponents();
+        //Inicializar el timer
         Time();
         timer = new Timer(1000, (ActionEvent e ) ->{
             Time();
         });
         timer.start();
-        AgregarPanel(new LogIn(this));
+        AgregarPanel(new LogIn(this));//Agregar el panel
     }
     
     @SuppressWarnings("unchecked")
@@ -211,6 +212,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
     public void AgregarPanel(javax.swing.JPanel Panel){
+        //AGREGA EL PANEL
         Panel.setSize(470, 380);
         Panel.setLocation(0, 0);
         Container.removeAll();
@@ -224,6 +226,7 @@ public class Inicio extends javax.swing.JFrame {
     }
     
     private void Time(){
+        //Timer que muestra la hora
         Calendar ahora = Calendar.getInstance();
         int hora = ahora.get(Calendar.HOUR_OF_DAY);
         int minuto = ahora.get(Calendar.MINUTE);
@@ -248,12 +251,14 @@ public class Inicio extends javax.swing.JFrame {
         
     }
     
+    //Buscando los usuarios ya registrados con sus configs
     private static void readData() throws IOException, ClassNotFoundException{
         FileInputStream archivo = new FileInputStream("src/Archivo.seq");
            ObjectInputStream objeto = new ObjectInputStream(archivo);
            Inicio.ManagerAcc = (Usuario.GestorUsuarios)objeto.readObject();
     }
     
+    //Vamos a registrar el user
     public static void writeData() throws IOException, ClassNotFoundException{
         FileOutputStream archivo = new FileOutputStream("src/Archivo.seq");
                         ObjectOutputStream objeto = new ObjectOutputStream(archivo);
@@ -270,6 +275,7 @@ public class Inicio extends javax.swing.JFrame {
             System.out.println("ERROR: No se encontro un archivo calificado para la clase.");
             Inicio.ManagerAcc = new Usuario.GestorUsuarios();
         }
+        //INICIALIZA TODO
         Inicio inicio = new Inicio();
         inicio.setLocationRelativeTo(null);
         inicio.setVisible(true);

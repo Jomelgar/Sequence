@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
  * @author jomel
  */
 public enum Cartas {
+    //Nombramiento de todas las cartas
     PA("/Cartas/Imagenes/AS.png"),DA("/Cartas/Imagenes/AD.png"),CA("/Cartas/Imagenes/AH.png"),TA("/Cartas/Imagenes/AC.png"),
     P2("/Cartas/Imagenes/2S.png"),D2("/Cartas/Imagenes/2D.png"),C2("/Cartas/Imagenes/2H.png"),T2("/Cartas/Imagenes/2C.png"),
     P3("/Cartas/Imagenes/3S.png"),D3("/Cartas/Imagenes/3D.png"),C3("/Cartas/Imagenes/3H.png"),T3("/Cartas/Imagenes/3C.png"),

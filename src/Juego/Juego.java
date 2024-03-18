@@ -11,19 +11,22 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 public class Juego extends javax.swing.JFrame {
+    //INSTANCIAS DE CLASES
     public Jugador JugadorActual;
     public Jugador[] Jugadores;
-    int size = 0;
-    int pos = 1;
-    boolean bloquear = false;
-    EnTurno[] players;
+    int size = 0;//El que decrece toda la baraja
+    int pos = 1;//Ayuda a saber cual es el jugador actual
+    boolean bloquear = false;//
+    EnTurno[] players;//Representa quien esta en turno actual
      NoTurno[] subplayers;
-    Cartas[] Deck;
-    public Board tablero;
+    Cartas[] Deck;// EL MAZO
+    //INNSTANCIAS
+    public Board tablero; 
     public Manojo manojo;
     
     public Juego(Jugador[] Jugadores, Cartas[] baraja) {
         initComponents();
+        //INICIALIZACION DE VARIABLES E INSTANCIAS
         this.setExtendedState(MAXIMIZED_BOTH);
         this.Jugadores = Jugadores;
         this.Deck = baraja;
@@ -42,12 +45,13 @@ public class Juego extends javax.swing.JFrame {
         Mano.add(manojo);
         Mano.revalidate();
         Mano.repaint();
+        
         repartirCartas();
         manojo.setManojo();
         initializePlayers();
         posicionarJugadores();
         startCronometer();
-        this.Deck_Countdown.setText(Integer.toString(104-size));
+        this.Deck_Countdown.setText(Integer.toString(104-size));//Texto sobre la carta
         
     }
 
@@ -394,7 +398,6 @@ public class Juego extends javax.swing.JFrame {
             }
         }
         Deck = Cartas.refresh(cartasenMano,size);
-        
     }
     
     public void DrawCard(Jugador jugador, int lugar){

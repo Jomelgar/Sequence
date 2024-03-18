@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author jomel
+ * @author harle
  */
 public class Jugador {
     Fichas ficha;

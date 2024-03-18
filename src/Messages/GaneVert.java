@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author jomel
+ * @author harle
  */
 public class GaneVert extends javax.swing.JDialog {
 

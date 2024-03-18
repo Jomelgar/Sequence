@@ -20,9 +20,9 @@ public class Config extends javax.swing.JPanel {
      */
     public Config() {
         initComponents();
-        txtUser.setText(Inicio.usuario.getNombre());
-        switch(Inicio.usuario.getCant()){
-            case 2:
+        txtUser.setText(Inicio.usuario.getNombre());//Establece el nombre del USER ACTUAL extraido del inicio
+        switch(Inicio.usuario.getCant()){ //Extraer la configuracion del perfil que inicioo sesion
+            case 2: //Los cases son el modo que jugara, si jugara de 2, 3, 4, 6 o 8 jugadores
                 TipeGame.setSelectedIndex(0);
                 break;
             case 3:
@@ -38,7 +38,7 @@ public class Config extends javax.swing.JPanel {
                 TipeGame.setSelectedIndex(4);
                 break;
         }
-        switch(Inicio.usuario.getColor()){
+        switch(Inicio.usuario.getColor()){ //Extrae del combobox el color de ficha que eligio el user
             case RED:
                 ColorToken.setSelectedIndex(0);
                 break;
@@ -51,8 +51,10 @@ public class Config extends javax.swing.JPanel {
             case GREEN:
                 ColorToken.setSelectedIndex(3);
         }
-        setDemonsToken();
+        setDemonsToken();//Coloca la imagen de la ficha seleccionada
+        //Set Demostration Token
         
+        //Consigue el arreglo de los poderes que el user selecciono
         int[] copia = Inicio.usuario.getCardPower();
         CBReyPica.setSelectedIndex(copia[0]);
         CBReyDia.setSelectedIndex(copia[1]);
@@ -285,15 +287,14 @@ public class Config extends javax.swing.JPanel {
         System.out.println(Inicio.usuario.getCant());
         try {
             Inicio.writeData();
-        } catch (IOException ex) {
-            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_TipeGameItemStateChanged
 
     private void ColorTokenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ColorTokenItemStateChanged
-        // TODO add your handling code here:
+        // Asigna al user la ficha que eligio y muestra en pantalla
+        
         switch(ColorToken.getSelectedIndex()){
             case 0:
                 Inicio.usuario.setFicha(Fichas.RED);
@@ -312,15 +313,13 @@ public class Config extends javax.swing.JPanel {
         
         try {
             Inicio.writeData();
-        } catch (IOException ex) {
-            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ColorTokenItemStateChanged
 
     private void CBReyPicaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBReyPicaItemStateChanged
-        // TODO add your handling code here:
+        //Asignarle el power a la card
         Inicio.usuario.setPower(40, CBReyPica.getSelectedIndex());
         
         try {
@@ -453,6 +452,7 @@ public class Config extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables
+    //Demuestra la ficha seleccionada en pnatalla
     void setDemonsToken(){
         Muestra_Ficha.setText("");
         Muestra_Ficha.setIcon(Inicio.usuario.getColor().getMuestra());
