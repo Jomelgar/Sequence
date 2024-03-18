@@ -8,6 +8,7 @@ import Jugador.Cartas;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -135,6 +136,15 @@ public class Manojo extends javax.swing.JPanel {
                     }
                     Border border = new javax.swing.border.LineBorder(new java.awt.Color(0,200,0), 4);
                     juego.tablero.detectCard(Cartas.getImage((ImageIcon)Manojo[i].getIcon()));
+                    if(juego.tablero.borderisEmpty()){
+                        int respuesta = JOptionPane.showConfirmDialog(null, "¿Quieres reemplazar la carta?", "Confirmación", 
+                                JOptionPane.YES_NO_CANCEL_OPTION);
+                        if (respuesta == JOptionPane.YES_OPTION) {
+                            juego.DrawCard(juego.JugadorActual, getSelectCard());
+                            juego.Deck_Countdown.setText(Integer.toString(104-juego.size));
+                            setManojo();
+                        }
+                    }
                     juego.bloquear = false;
                     Manojo[i].setBorder(border);
                     pos = i;

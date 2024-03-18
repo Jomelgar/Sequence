@@ -282,7 +282,7 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JPanel Board;
     private javax.swing.JLabel Cards;
     private javax.swing.JPanel Contenedor;
-    private javax.swing.JLabel Deck_Countdown;
+    public javax.swing.JLabel Deck_Countdown;
     private javax.swing.JLabel LastCard;
     private javax.swing.JPanel Mano;
     private javax.swing.JPanel PlayerSlide;

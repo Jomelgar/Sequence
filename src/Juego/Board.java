@@ -522,6 +522,17 @@ public class Board extends javax.swing.JPanel {
          }
         return false;
     }
+    
+    boolean borderisEmpty(){
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                if(Posiciones[f][c].getBorder() != null){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
