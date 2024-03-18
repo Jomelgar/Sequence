@@ -248,6 +248,7 @@ public class Juego extends javax.swing.JFrame {
         // TODO add your handling code here:
         cambioTurno(false,false);
         this.Deck_Countdown.setText(Integer.toString(104-size));
+        tablero.emptyBorder();
     }//GEN-LAST:event_CardsMousePressed
 
     private void LastCardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LastCardMousePressed
